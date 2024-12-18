@@ -1,7 +1,7 @@
 #pragma once
 class CollisionMap1
 {
-    static const int PARTITIONS = 150;
+    static const int PARTITIONS = 256;
 public:
     int size_x;
     int size_y;
@@ -26,8 +26,8 @@ public:
 
         if (left >= size_x) left = size_x-1;
         if (right >= size_x) right = size_x-1;
-        if (top > size_y) top = size_y-1;
-        if (bottom > size_y) bottom = size_y-1;
+        if (top >= size_y) top = size_y-1;
+        if (bottom >= size_y) bottom = size_y-1;
 
 
         unsigned int slots[4] = {

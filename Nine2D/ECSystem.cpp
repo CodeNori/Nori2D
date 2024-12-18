@@ -8,7 +8,7 @@
 
 
 ecs_t* ecs1 = NULL;
-
+nr::Vec2 g_CameraPos = {1280/2,720/2};
 IRenderer* g_ECS_Renderer = nullptr;
 
 // component IDs
@@ -33,6 +33,21 @@ const WCHAR* g_Tex_Name[] = {
 
 
 CollisionMap1 col_Map1;
+
+
+
+
+//----------------------------------------------------------------------
+Vec2 ScreenToWorld(Vec2 a)
+{
+    float dx = (a.x - g_Dx11.half_width);
+    float dy = (g_Dx11.half_height - a.y);
+    
+    
+    return {dx+ g_CameraPos.x,dy+g_CameraPos.y};
+    
+}
+
 
 int GetCollisionEventCount() {
     return col_Map1.events.size();
@@ -94,13 +109,15 @@ ecs_ret_t Movement_System(ecs_t* ecs,
 
 
 
-        float right =  (float)(g_Dx11.width-50);
-        float bottom =  (float)(g_Dx11.height-50);
-        if (pos->x > right ||
-            pos->x < 100.f ||
-            pos->y > bottom ||
-            pos->y < 100.f ) 
-        { 
+        float Scn_left =  g_CameraPos.x-g_Dx11.half_width;
+        float Scn_right = g_CameraPos.x + g_Dx11.half_width;
+        float Scn_top = g_CameraPos.y + g_Dx11.half_height;
+        float Scn_bottom = g_CameraPos.y - g_Dx11.half_height;
+        if (pos->x < Scn_left  ||
+            pos->x > Scn_right ||
+            pos->y < Scn_bottom||
+            pos->y > Scn_top)
+        {
             int x = rand() % g_Dx11.width;
             int y = rand() % g_Dx11.height;
     
@@ -227,13 +244,19 @@ void create_entity1()
     Rect_t*  rc = (Rect_t*)ecs_add(ecs1, id, RectCompID, NULL);
 
     *type  = 2;
-    *pos    = { 600, 400, 0.f };
 
-    int x = rand() % g_Dx11.width;
-    int y = rand() % g_Dx11.height;
+    
+    float x = (float)(rand() % g_Dx11.width);
+    float y = (float)(rand() % g_Dx11.height);
+    Vec2 p = ScreenToWorld({x,y});
+    *pos = { p.x,p.y,0.f };
+    
 
-    dir->x = ((float)x) - pos->x;
-    dir->y = ((float)y) - pos->y;
+    x = (float)(rand() % g_Dx11.width);
+    y = (float)(rand() % g_Dx11.height);
+
+    dir->x = x - pos->x;
+    dir->y = y - pos->y;
     dir->normalize();
     *dir *= 100.f;
 

@@ -67,7 +67,7 @@ struct CameraComponents
 
 extern Dx11Vars g_Dx11;
 extern TimeData g_Time;
-
+extern nr::Vec2 g_CameraPos;
 
 struct Vec2_t
 {

@@ -123,7 +123,7 @@ void Quad::Update2(Dx2DRenderable* rd, Rect_t* rc)
 {
 	float flx = (rc->l - g_Dx11.half_width) / g_Dx11.half_width;
 	float frx = (rc->r - g_Dx11.half_width) / g_Dx11.half_width;
-	float fty = (rc->t - g_Dx11.half_height) / g_Dx11.half_height;
+	float fty = (rc->t - g_Dx11.half_height ) / g_Dx11.half_height;
 	float fby = (rc->b - g_Dx11.half_height) / g_Dx11.half_height;
 
 	VERTEX OurVertices[4] =

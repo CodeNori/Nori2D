@@ -2,6 +2,7 @@
 #include "DemoGame1.h"
 #include "renderer\Dx2DRenderer.h"
 #include "Actor.h"
+#include "Components.h"
 
 
 void create_entitys();
@@ -9,6 +10,8 @@ void create_entitys();
 
 DemoGame1::DemoGame1() 
 {
+	g_CameraPos.x = g_Dx11.half_width;
+	g_CameraPos.y = g_Dx11.half_height;
 	register_components();
 	register_systems();
 }
