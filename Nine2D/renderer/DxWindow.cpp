@@ -428,7 +428,7 @@ void DxWindow::UpdateTimer()
 }
 
 
-
+int GetCollisionEventCount();
 //
 // --------------------------------------------------------
 // Updates the window's title bar with several stats once
@@ -449,14 +449,17 @@ void DxWindow::UpdateTitleBarStats()
 	// How long did each frame take?  (Approx)
 	float mspf = 1000.0f / (float)g_Time.fpsFrameCount;
 
+
 	// Quick and dirty title bar text (mostly for debugging)
 	std::ostringstream output;
 	output.precision(6);
 	output << g_Dx11.titleBarText <<
-		"    Width: "		<< g_Dx11.width <<
-		"    Height: "		<< g_Dx11.height <<
-		"    FPS: "			<< g_Time.fpsFrameCount <<
-		"    Frame Time: "	<< mspf << "ms";
+		"    Width: " << g_Dx11.width <<
+		"    Height: " << g_Dx11.height <<
+		"    FPS: " << g_Time.fpsFrameCount <<
+		"    Frame Time: " << mspf << "ms" <<
+		"    Collision:  " << GetCollisionEventCount();
+
 
 	// Append the version of DirectX the app is using
 	switch (g_Dx11.dxFeatureLevel)

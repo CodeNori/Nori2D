@@ -36,7 +36,7 @@ void DemoGame1::Update(float delta)
 
 void DemoGame1::sample()
 {
-	for(int i=0; i<1000; ++i)
+	for(int i=0; i<100; ++i)
 		create_entity1();
 
 	create_entity2();

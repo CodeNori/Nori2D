@@ -139,6 +139,7 @@
     <ClInclude Include="base\MathBase.h" />
     <ClInclude Include="base\RefObject.h" />
     <ClInclude Include="base\Vec2.h" />
+    <ClInclude Include="CollisionMap1.h" />
     <ClInclude Include="Components.h" />
     <ClInclude Include="DemoGame.h" />
     <ClInclude Include="DemoGame1.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Actor1.cpp" />
     <ClCompile Include="base\Vec2.cpp" />
+    <ClCompile Include="CollisionMap1.cpp" />
     <ClCompile Include="ECSystem.cpp" />
     <ClCompile Include="DemoGame.cpp" />
     <ClCompile Include="DemoGame1.cpp" />

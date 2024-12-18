@@ -87,22 +87,30 @@ struct Velocity_t
 
 struct Img_t
 {
-	float w,h;
-	float ancherX, ancherY;
 	int dir;
 	int frameNo;
 	float AnimTime;
 
 	const WCHAR* texName; 
     void* tex;
-} ;
+};
 
+struct Anchor_t
+{
+	float w, h;
+	float anchorX, anchorY;
+};
 
 struct Rect_t
 {
-    int x, y, w, h;
-} ;
+    float l, t, r, b;
+	ecs_id_t id;
+};
 
+struct CollisionEvent
+{
+	ecs_id_t l, r;
+};
 
 
 extern ecs_t* ecs1;

@@ -1,10 +1,14 @@
 #pragma once
 
 
-struct Actor1 
+struct Color4
 {
-
+    float r, g, b, a;
 };
 
 
 
+class Actor1
+{
+
+};

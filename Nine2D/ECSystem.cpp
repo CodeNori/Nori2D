@@ -1,9 +1,11 @@
 #include"pch.h"
 #include "base/Vec2.h"
 #include "renderer\Dx2DRenderable.h"
+#include "CollisionMap1.h"
 
 #define PICO_ECS_IMPLEMENTATION
 #include "pico\pico_ecs.h"
+
 
 ecs_t* ecs1 = NULL;
 
@@ -15,6 +17,8 @@ ecs_id_t VelocityCompID;
 ecs_id_t TextureCompID;
 ecs_id_t HouseCompID;
 ecs_id_t UnitCompID;
+ecs_id_t RectCompID;
+ecs_id_t AnchorCompID;
 
 // System IDs
 ecs_id_t MovementSysID;
@@ -27,15 +31,27 @@ const WCHAR* g_Tex_Name[] = {
     L"Image\\Ultralisk.png",
 };
 
+
+CollisionMap1 col_Map1;
+
+int GetCollisionEventCount() {
+    return col_Map1.events.size();
+
+}
+
 void register_components()
 {
     PositionCompID  = ecs_register_component(ecs1, sizeof(Pos_t),  NULL, NULL);
     VelocityCompID  = ecs_register_component(ecs1, sizeof(Velocity_t),  NULL, NULL);
     TextureCompID  = ecs_register_component(ecs1, sizeof(Img_t),  NULL, NULL);
+    AnchorCompID = ecs_register_component(ecs1, sizeof(Anchor_t), NULL, NULL);
+    RectCompID = ecs_register_component(ecs1, sizeof(Rect_t), NULL, NULL);
     HouseCompID  = ecs_register_component(ecs1, sizeof(char),  NULL, NULL);
-    UnitCompID  = ecs_register_component(ecs1, sizeof(char),  NULL, NULL);
+    UnitCompID = ecs_register_component(ecs1, sizeof(char), NULL, NULL);
+
 
 }
+
 
 
 ecs_ret_t Movement_System(ecs_t* ecs,
@@ -45,6 +61,10 @@ ecs_ret_t Movement_System(ecs_t* ecs,
                           void* udata)
 {
     (void)udata;
+
+    if (col_Map1.isEnabled)
+        col_Map1.Setup(g_Dx11.width, g_Dx11.height);
+
     printf("Movement_System = %d \n", entity_count);
     float dt = dtt;
 
@@ -55,9 +75,24 @@ ecs_ret_t Movement_System(ecs_t* ecs,
 
         Pos_t* pos = (Pos_t*)ecs_get(ecs, id, PositionCompID);
         Vec2* dir = (Vec2*)ecs_get(ecs, id, VelocityCompID);
+        Anchor_t* anchor = (Anchor_t*)ecs_get(ecs, id, AnchorCompID);
+        Rect_t* rect = (Rect_t*)ecs_get(ecs, id, RectCompID);
 
         pos->x += dir->x * dt;
         pos->y += dir->y * dt;
+
+        {
+            rect->l = pos->x - (anchor->w * anchor->anchorX);
+            rect->t = pos->y + (anchor->h * anchor->anchorY);
+            rect->r = rect->l + anchor->w;
+            rect->b = rect->t - anchor->h;
+            rect->id = id;
+
+            if (col_Map1.isEnabled)
+                col_Map1.Collect(rect);
+        }
+
+
 
         float right =  (float)(g_Dx11.width-50);
         float bottom =  (float)(g_Dx11.height-50);
@@ -107,21 +142,23 @@ ecs_ret_t Render_System(ecs_t* ecs,
 
         Pos_t* pos = (Pos_t*)ecs_get(ecs, id, PositionCompID);
         Img_t* img = (Img_t*)ecs_get(ecs, id, TextureCompID);
+        Rect_t* rect = (Rect_t*)ecs_get(ecs, id, RectCompID);
 
         rd.position.x = pos->x;
         rd.position.y = pos->y;
         rd.angle = pos->angle; 
-        rd.w = img->w;
-        rd.h = img->h;
-        rd.ancherX = img->ancherX; 
-        rd.ancherY = img->ancherY; 
+        //rd.w = img->w;
+        //rd.h = img->h;
+        //rd.ancherX = img->ancherX; 
+        //rd.ancherY = img->ancherY;
+        // 
         rd.tex.mName = img->texName;
         rd.tex.mTextureRV = (ID3D11ShaderResourceView*)img->tex;
         rd.dir = img->dir;
         rd.AnimTime = img->AnimTime;
         rd.frameNo = img->frameNo;
         
-        g_ECS_Renderer->Draw2(&rd);
+        g_ECS_Renderer->Draw2(&rd, rect);
 
         img->tex = rd.tex.mTextureRV;   // 저장..
         img->AnimTime = rd.AnimTime;    // 저장..
@@ -140,6 +177,8 @@ void register_systems()
     MovementSysID = ecs_register_system(ecs1, Movement_System, NULL, NULL, NULL);
     ecs_require_component(ecs1, MovementSysID, PositionCompID);
     ecs_require_component(ecs1, MovementSysID, VelocityCompID);
+    ecs_require_component(ecs1, MovementSysID, AnchorCompID);
+    ecs_require_component(ecs1, MovementSysID, RectCompID);
 
     RenderSysID1 = ecs_register_system(ecs1, Render_System, NULL, NULL, NULL);
     ecs_require_component(ecs1, RenderSysID1, PositionCompID);
@@ -162,10 +201,15 @@ void Render_system_all(float dt)
 
 void Update_system_all(float dt)
 {
+    static UINT64 cnt = 0;
+    if (++cnt % 10 == 0) col_Map1.isEnabled = true;
+    else col_Map1.isEnabled = false;
+
     double dtt = dt;
     ecs_update_system(ecs1, MovementSysID, dtt);
 
-
+    if(col_Map1.isEnabled)
+        col_Map1.Collide();
 }
 
 
@@ -178,7 +222,9 @@ void create_entity1()
     Pos_t* pos = (Pos_t*)ecs_add(ecs1, id, PositionCompID, NULL);
     Vec2*  dir = (Vec2*)ecs_add(ecs1, id, VelocityCompID, NULL);
     Img_t*  img = (Img_t*)ecs_add(ecs1, id, TextureCompID, NULL);
-    char*  type = (char*)ecs_add(ecs1, id, UnitCompID, NULL);
+    char* type = (char*)ecs_add(ecs1, id, UnitCompID, NULL);
+    Anchor_t* anchor = (Anchor_t*)ecs_add(ecs1, id, AnchorCompID, NULL);
+    Rect_t*  rc = (Rect_t*)ecs_add(ecs1, id, RectCompID, NULL);
 
     *type  = 2;
     *pos    = { 600, 400, 0.f };
@@ -191,10 +237,11 @@ void create_entity1()
     dir->normalize();
     *dir *= 100.f;
 
-    img->ancherX = 0.5f;
-    img->ancherY = 0.5f;
-    img->w = 100;
-    img->h = 100;
+    anchor->anchorX = 0.5f;
+    anchor->anchorY = 0.5f;
+    anchor->w = 128;
+    anchor->h = 128;
+
     img->texName = g_Tex_Name[2];
     img->tex = nullptr;
 
@@ -212,6 +259,8 @@ void create_entity2()
     Pos_t* pos = (Pos_t*)ecs_add(ecs1, id, PositionCompID, NULL);
     Img_t*  img = (Img_t*)ecs_add(ecs1, id, TextureCompID, NULL);
     char*  type = (char*)ecs_add(ecs1, id, HouseCompID, NULL);
+    Anchor_t* anchor = (Anchor_t*)ecs_add(ecs1, id, AnchorCompID, NULL);
+    Rect_t* rc = (Rect_t*)ecs_add(ecs1, id, RectCompID, NULL);
 
     *type = 1;
 
@@ -219,10 +268,10 @@ void create_entity2()
     pos->y = (float)( rand() % g_Dx11.height );
     pos->angle = 0.f;
 
-    img->ancherX = 0.5f;
-    img->ancherY = 0.5f;
-    img->w = 100;
-    img->h = 100;
+    anchor->anchorX = 0.5f;
+    anchor->anchorY = 0.5f;
+    anchor->w = 100;
+    anchor->h = 100;
     img->texName = g_Tex_Name[1];
     img->tex = nullptr;
 

@@ -23,9 +23,11 @@
     <Filter Include="Renderer">
       <UniqueIdentifier>{498b5da0-a993-4ba2-9989-7fb139bb831b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ECS">
+      <UniqueIdentifier>{023661de-46d5-4ed8-ba95-14261cb59f02}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Components.h" />
     <ClInclude Include="tk\DDS.h">
       <Filter>tk</Filter>
     </ClInclude>
@@ -73,8 +75,6 @@
     <ClInclude Include="base\Vec2.h">
       <Filter>base</Filter>
     </ClInclude>
-    <ClInclude Include="Actor1.h" />
-    <ClInclude Include="DemoGame1.h" />
     <ClInclude Include="renderer\ConstantBuffer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
@@ -98,6 +98,18 @@
     </ClInclude>
     <ClInclude Include="AnimationData.h" />
     <ClInclude Include="preDefines.h" />
+    <ClInclude Include="Components.h">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="DemoGame1.h">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor1.h">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionMap1.h">
+      <Filter>ECS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tk\DDSTextureLoader.cpp">
@@ -117,9 +129,6 @@
     <ClCompile Include="base\Vec2.cpp">
       <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="Actor1.cpp" />
-    <ClCompile Include="DemoGame1.cpp" />
-    <ClCompile Include="ECSystem.cpp" />
     <ClCompile Include="renderer\Dx2DRenderer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
@@ -134,6 +143,18 @@
     </ClCompile>
     <ClCompile Include="renderer\Quad.cpp">
       <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="DemoGame1.cpp">
+      <Filter>ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="ECSystem.cpp">
+      <Filter>ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor1.cpp">
+      <Filter>ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionMap1.cpp">
+      <Filter>ECS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -118,10 +118,37 @@ void Quad::Update(Dx2DRenderable* rd)
 	
 }
 
+
+void Quad::Update2(Dx2DRenderable* rd, Rect_t* rc)
+{
+	float flx = (rc->l - g_Dx11.half_width) / g_Dx11.half_width;
+	float frx = (rc->r - g_Dx11.half_width) / g_Dx11.half_width;
+	float fty = (rc->t - g_Dx11.half_height) / g_Dx11.half_height;
+	float fby = (rc->b - g_Dx11.half_height) / g_Dx11.half_height;
+
+	VERTEX OurVertices[4] =
+	{
+		{flx, fby, 0.0f, 0.f, 1.f},
+		{flx, fty, 0.0f, 0.f, 0.f},
+		{frx, fby, 0.0f, 1.f, 1.f},
+		{frx, fty, 0.0f, 1.f, 0.f}
+	};
+
+	if (rd->tex.mName != g_Tex_Name[1])
+		DxTextureMgr::get()->GetUV(rd, OurVertices);
+	// g_Dx11.context->UpdateSubresource( mVertexBuffer, 0, nullptr, OurVertices, 0, 0 );
+
+
+	D3D11_MAPPED_SUBRESOURCE ms;
+	g_Dx11.context->Map(mVertexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, NULL, &ms);
+	memcpy(ms.pData, OurVertices, sizeof(OurVertices));
+	g_Dx11.context->Unmap(mVertexBuffer, NULL);
+
+}
+
+
 void Quad::Draw(Dx2DRenderable* sp)
 {
-	Update(sp);
-
 	g_Dx11.context->IASetInputLayout(mVertexLayout);
 
 	UINT stride = sizeof(VERTEX);

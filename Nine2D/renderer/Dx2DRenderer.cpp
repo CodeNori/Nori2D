@@ -115,7 +115,7 @@ void Dx2DRenderer::Draw(Dx2DRenderable* sp)
 		//sp->tex.Load()
 		DxTextureMgr::get()->New(sp->tex);
 	}
-
+	mQuad->Update(sp);
 	mQuad->Draw(sp);
 
 	CBChangesEveryFrame cb;
@@ -135,15 +135,15 @@ void Dx2DRenderer::Draw(Dx2DRenderable* sp)
 
 
 
-
-void Dx2DRenderer::Draw2(Dx2DRenderable2* sp)
+void Dx2DRenderer::Draw2(Dx2DRenderable2* sp, Rect_t* rc)
 {
-	if(sp->tex.isNull()) {
+	if (sp->tex.isNull()) {
 		sp->tex.mTextureRV = DxTextureMgr::get()->Find(sp->tex.mName);
 	}
 
 	ID3D11Buffer* vb = mQuad->mVertexBuffer;
 
+	mQuad->Update2((Dx2DRenderable*)sp, rc);
 	mQuad->Draw((Dx2DRenderable*)sp);
 
 	UINT stride = sizeof(VERTEX);
@@ -162,7 +162,6 @@ void Dx2DRenderer::Draw2(Dx2DRenderable2* sp)
 	g_Dx11.context->OMSetBlendState(mBlendState, 0, 0xFFFFFFFF);
 	g_Dx11.context->Draw(mQuad->mVertexCount, 0);
 }
-
 
 
 

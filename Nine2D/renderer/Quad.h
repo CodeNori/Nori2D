@@ -11,6 +11,7 @@ public:
 	HRESULT createInputLayout(ID3DBlob* mBlob);
 
 	void Update(Dx2DRenderable* rd);
+	void Update2(Dx2DRenderable* rd, Rect_t* rc);
 	void Draw(Dx2DRenderable* sp);
 
 	int mVertexCount = 4;
