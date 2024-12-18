@@ -143,7 +143,7 @@ void Dx2DRenderer::Draw2(Dx2DRenderable2* sp, Rect_t* rc)
 
 	ID3D11Buffer* vb = mQuad->mVertexBuffer;
 
-	mQuad->Update2((Dx2DRenderable*)sp, rc);
+	mQuad->Update((Dx2DRenderable*)sp);
 	mQuad->Draw((Dx2DRenderable*)sp);
 
 	UINT stride = sizeof(VERTEX);

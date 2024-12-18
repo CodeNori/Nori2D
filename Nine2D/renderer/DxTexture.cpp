@@ -96,14 +96,11 @@ void DxTextureMgr::GetUV(Dx2DRenderable* rd, VERTEX* Vt)
 
 	UltraRect uv = GetActorUV(rd);
 
-	Vt[0].U = uv.U1;
-	Vt[0].V = uv.V2;
-	Vt[1].U = uv.U1;
-	Vt[1].V = uv.V1;
-	Vt[2].U = uv.U2;
-	Vt[2].V = uv.V2;
-	Vt[3].U = uv.U2;
-	Vt[3].V = uv.V1;
+	Vt[0].U = uv.U1; Vt[0].V = uv.V2;
+	Vt[1].U = uv.U1; Vt[1].V = uv.V1;
+	Vt[2].U = uv.U2; Vt[2].V = uv.V2;
+	Vt[3].U = uv.U2; Vt[3].V = uv.V1;
+
 }
 
 ID3D11ShaderResourceView* DxTextureMgr::Find(const WCHAR* name)

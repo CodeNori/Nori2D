@@ -104,7 +104,7 @@ ecs_ret_t Movement_System(ecs_t* ecs,
             rect->id = id;
 
             if (col_Map1.isEnabled)
-                col_Map1.Collect(rect);
+                col_Map1.Insert(rect);
         }
 
 
@@ -262,8 +262,8 @@ void create_entity1()
 
     anchor->anchorX = 0.5f;
     anchor->anchorY = 0.5f;
-    anchor->w = 128;
-    anchor->h = 128;
+    anchor->w = 64;
+    anchor->h = 64;
 
     img->texName = g_Tex_Name[2];
     img->tex = nullptr;

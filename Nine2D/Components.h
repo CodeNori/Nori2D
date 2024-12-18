@@ -65,9 +65,6 @@ struct CameraComponents
 	float yRotation;
 };
 
-extern Dx11Vars g_Dx11;
-extern TimeData g_Time;
-extern nr::Vec2 g_CameraPos;
 
 struct Vec2_t
 {
@@ -101,6 +98,11 @@ struct Anchor_t
 	float anchorX, anchorY;
 };
 
+struct Vertex_t
+{
+    float x1, y1, x2, y2;
+};
+
 struct Rect_t
 {
     float l, t, r, b;
@@ -112,7 +114,9 @@ struct CollisionEvent
 	ecs_id_t l, r;
 };
 
-
+extern Dx11Vars g_Dx11;
+extern TimeData g_Time;
+extern nr::Vec2 g_CameraPos;
 extern ecs_t* ecs1;
 
 void register_components();

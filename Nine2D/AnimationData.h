@@ -75,6 +75,11 @@ UltraRect& GetActorUV(Dx2DRenderable* rd)
 {
 	if (rd->tex.mName == ULTRA_NAME)
 	{
+		rd->ancherX = 0.5f;
+		rd->ancherY = 0.5f;
+		rd->h = 128;
+		rd->w = 128;
+
 		switch (rd->dir)
 		{
 		case 0: return Ultra_0[rd->frameNo];
@@ -95,7 +100,7 @@ UltraRect& GetActorUV(Dx2DRenderable* rd)
 		case 15: return Ultra_15[rd->frameNo];
 		}
 	}
-		return Ultra_0[0];
+	return Ultra_0[0];
 }
 
 AnimRectTime& GetActorTime(Dx2DRenderable* rd)
