@@ -48,4 +48,8 @@ void DemoGame1::sample()
 
 }
 
+void DemoGame1::getMouse(int x, int y)
+{
+}
+
 
