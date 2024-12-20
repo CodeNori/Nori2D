@@ -60,7 +60,7 @@ void register_components()
     VelocityCompID  = ecs_register_component(ecs1, sizeof(Velocity_t),  NULL, NULL);
     TextureCompID  = ecs_register_component(ecs1, sizeof(Img_t),  NULL, NULL);
     AnchorCompID = ecs_register_component(ecs1, sizeof(Anchor_t), NULL, NULL);
-    RectCompID = ecs_register_component(ecs1, sizeof(Rect_t), NULL, NULL);
+    RectCompID = ecs_register_component(ecs1, sizeof(CollisionRect), NULL, NULL);
     HouseCompID  = ecs_register_component(ecs1, sizeof(char),  NULL, NULL);
     UnitCompID = ecs_register_component(ecs1, sizeof(char), NULL, NULL);
 
@@ -78,7 +78,7 @@ ecs_ret_t Movement_System(ecs_t* ecs,
     (void)udata;
 
     if (col_Map1.isEnabled)
-        col_Map1.Setup(g_Dx11.width, g_Dx11.height);
+        col_Map1.Setup(0.f, 0.f, g_Dx11.width, g_Dx11.height );
 
     printf("Movement_System = %d \n", entity_count);
     float dt = dtt;
@@ -91,7 +91,7 @@ ecs_ret_t Movement_System(ecs_t* ecs,
         Pos_t* pos = (Pos_t*)ecs_get(ecs, id, PositionCompID);
         Vec2* dir = (Vec2*)ecs_get(ecs, id, VelocityCompID);
         Anchor_t* anchor = (Anchor_t*)ecs_get(ecs, id, AnchorCompID);
-        Rect_t* rect = (Rect_t*)ecs_get(ecs, id, RectCompID);
+        CollisionRect* rect = (CollisionRect*)ecs_get(ecs, id, RectCompID);
 
         pos->x += dir->x * dt;
         pos->y += dir->y * dt;
@@ -159,7 +159,7 @@ ecs_ret_t Render_System(ecs_t* ecs,
 
         Pos_t* pos = (Pos_t*)ecs_get(ecs, id, PositionCompID);
         Img_t* img = (Img_t*)ecs_get(ecs, id, TextureCompID);
-        Rect_t* rect = (Rect_t*)ecs_get(ecs, id, RectCompID);
+        CollisionRect* rect = (CollisionRect*)ecs_get(ecs, id, RectCompID);
 
         rd.position.x = pos->x;
         rd.position.y = pos->y;
@@ -241,7 +241,7 @@ void create_entity1()
     Img_t*  img = (Img_t*)ecs_add(ecs1, id, TextureCompID, NULL);
     char* type = (char*)ecs_add(ecs1, id, UnitCompID, NULL);
     Anchor_t* anchor = (Anchor_t*)ecs_add(ecs1, id, AnchorCompID, NULL);
-    Rect_t*  rc = (Rect_t*)ecs_add(ecs1, id, RectCompID, NULL);
+    CollisionRect*  rc = (CollisionRect*)ecs_add(ecs1, id, RectCompID, NULL);
 
     *type  = 2;
 
@@ -283,7 +283,7 @@ void create_entity2()
     Img_t*  img = (Img_t*)ecs_add(ecs1, id, TextureCompID, NULL);
     char*  type = (char*)ecs_add(ecs1, id, HouseCompID, NULL);
     Anchor_t* anchor = (Anchor_t*)ecs_add(ecs1, id, AnchorCompID, NULL);
-    Rect_t* rc = (Rect_t*)ecs_add(ecs1, id, RectCompID, NULL);
+    CollisionRect* rc = (CollisionRect*)ecs_add(ecs1, id, RectCompID, NULL);
 
     *type = 1;
 

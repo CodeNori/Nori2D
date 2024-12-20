@@ -12,6 +12,7 @@ public:
 
 	void Update(Dx2DRenderable* rd);
 	void Draw(Dx2DRenderable* sp);
+	void Apply(Dx2DRenderable* sp);
 
 	int mVertexCount = 4;
 	ID3D11Buffer *mVertexBuffer = nullptr;  

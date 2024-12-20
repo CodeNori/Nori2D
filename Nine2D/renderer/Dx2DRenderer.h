@@ -45,7 +45,7 @@ public:
 	Dx2DRenderer() { g=this; create(); }
 	~Dx2DRenderer();
 	void Draw(Dx2DRenderable* sprite) override;
-	void Draw2(Dx2DRenderable2* sprite, Rect_t* rc) override;
+	void Draw2(Dx2DRenderable2* sprite, CollisionRect* rc) override;
 
 public:
 	VsShader*	mVS = nullptr;

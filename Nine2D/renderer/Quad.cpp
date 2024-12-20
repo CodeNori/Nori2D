@@ -57,6 +57,8 @@ HRESULT Quad::create()
 
 HRESULT Quad::createInputLayout(ID3DBlob* mBlob)
 {
+	if(mVertexLayout) return S_OK;
+
 	HRESULT hr;
 
 	D3D11_INPUT_ELEMENT_DESC layout[] =
@@ -121,6 +123,18 @@ void Quad::Update(Dx2DRenderable* rd)
 
 void Quad::Draw(Dx2DRenderable* sp)
 {
+	g_Dx11.context->IASetInputLayout(mVertexLayout);
+
+	UINT stride = sizeof(VERTEX);
+	UINT offset = 0;
+	g_Dx11.context->IASetVertexBuffers(0, 1, &mVertexBuffer, &stride, &offset);
+	g_Dx11.context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+}
+
+void Quad::Apply(Dx2DRenderable* sp)
+{
+	Update(sp);
+
 	g_Dx11.context->IASetInputLayout(mVertexLayout);
 
 	UINT stride = sizeof(VERTEX);

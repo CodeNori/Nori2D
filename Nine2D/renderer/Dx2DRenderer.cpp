@@ -62,16 +62,20 @@ HRESULT Dx2DRenderer::createBS()
 {
 	HRESULT hr;
 
-	CD3D11_BLEND_DESC desc;
+	// CD3D11_BLEND_DESC desc;
+	D3D11_BLEND_DESC desc = {};
 	desc.AlphaToCoverageEnable = true;
 	desc.IndependentBlendEnable = false;
+
 	desc.RenderTarget[0].BlendEnable = true;
-	desc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+	desc.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;// D3D11_BLEND_SRC_ALPHA;// D3D11_BLEND_ONE;
 	desc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
-	desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
-	desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
 	desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+
+	desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE; //D3D11_BLEND_SRC_ALPHA;// D3D11_BLEND_ONE;
+	desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA;
 	desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+
 	desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
 	hr = g_Dx11.device->CreateBlendState(&desc, &mBlendState);
@@ -115,15 +119,14 @@ void Dx2DRenderer::Draw(Dx2DRenderable* sp)
 		//sp->tex.Load()
 		DxTextureMgr::get()->New(sp->tex);
 	}
-	mQuad->Update(sp);
-	mQuad->Draw(sp);
+	mQuad->Apply(sp);
 
 	CBChangesEveryFrame cb;
 	cb.vMeshColor = sp->color;
 	mCB.SetData(cb);
 
-	mVS->Draw();
-	mPS->Draw();
+	mVS->Apply();
+	mPS->Apply();
 
 	g_Dx11.context->PSSetConstantBuffers(0, 1, &mCB.mConstantBuffer);
 	g_Dx11.context->PSSetSamplers(0, 1, &mSamplerLinear);
@@ -135,25 +138,15 @@ void Dx2DRenderer::Draw(Dx2DRenderable* sp)
 
 
 
-void Dx2DRenderer::Draw2(Dx2DRenderable2* sp, Rect_t* rc)
+void Dx2DRenderer::Draw2(Dx2DRenderable2* sp, CollisionRect* rc)
 {
 	if (sp->tex.isNull()) {
 		sp->tex.mTextureRV = DxTextureMgr::get()->Find(sp->tex.mName);
 	}
 
-	ID3D11Buffer* vb = mQuad->mVertexBuffer;
-
-	mQuad->Update((Dx2DRenderable*)sp);
-	mQuad->Draw((Dx2DRenderable*)sp);
-
-	UINT stride = sizeof(VERTEX);
-	UINT offset = 0;
-	g_Dx11.context->IASetVertexBuffers(0, 1, &vb, &stride, &offset);
-	g_Dx11.context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-
-
-	mVS->Draw();
-	mPS->Draw();
+	mQuad->Apply((Dx2DRenderable*)sp);
+	mVS->Apply();
+	mPS->Apply();
 
 	g_Dx11.context->PSSetConstantBuffers(0, 1, &mCB.mConstantBuffer);
 	g_Dx11.context->PSSetSamplers(0, 1, &mSamplerLinear);

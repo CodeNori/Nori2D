@@ -1,23 +1,27 @@
 #pragma once
+
+
 class CollisionMap1
 {
     static const int PARTITIONS = 256;
 public:
     int size_x;
     int size_y;
-    
+    float start_x = 0.f;
+    float start_y = 0.f;
+
     bool isEnabled = true;
 
-    std::vector<std::vector<Rect_t>> grid;
+    std::vector<std::vector<CollisionRect>> grid;
     std::vector<CollisionEvent> events;
 
-    void Setup(int w, int h);
+    void Setup(float sx, float sy, int w, int h);
 
-    void Insert(Rect_t* rc);
+    void Insert(CollisionRect* rc);
 
     void Collide();
 
-    bool collided(const Rect_t& left, const Rect_t& right) 
+    bool collided(const CollisionRect& left, const CollisionRect& right) 
     {
         return ((left.r > right.l) &&
                 (right.r > left.l) &&

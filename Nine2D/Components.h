@@ -103,7 +103,7 @@ struct Vertex_t
     float x1, y1, x2, y2;
 };
 
-struct Rect_t
+struct CollisionRect
 {
     float l, t, r, b;
 	ecs_id_t id;

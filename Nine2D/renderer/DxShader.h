@@ -7,7 +7,7 @@ public:
 	VsShader(const WCHAR* fileName);
 	~VsShader();
 
-	void Draw() {
+	void Apply() {
 		g_Dx11.context->VSSetShader(mVertexShader, 0, 0);
 	}
 
@@ -21,7 +21,7 @@ public:
 	PsShader(const WCHAR* fileName);
 	~PsShader();
 
-	void Draw() {
+	void Apply() {
 		g_Dx11.context->PSSetShader(mPixelShader, 0, 0);
 	}
 	ID3D11PixelShader* mPixelShader;
