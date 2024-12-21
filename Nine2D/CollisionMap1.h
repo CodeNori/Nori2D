@@ -3,7 +3,7 @@
 
 class CollisionMap1
 {
-    static const int PARTITIONS = 256;
+    static const int PARTITIONS = (128*2);
 public:
     int size_x, size_y;
     float start_x, start_y;

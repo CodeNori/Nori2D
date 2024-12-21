@@ -29,9 +29,9 @@ HRESULT Dx2DRenderer::create()
 	hr = createBS();
 	
 	//creaVB();
-
+	mMeshColor = {1.0f, 1.0f, 1.0f, 1.f};
 	CBChangesEveryFrame cb;
-	cb.vMeshColor = {1.0f, 1.0f, 1.0f, 1.f};
+	cb.vMeshColor = mMeshColor;
 	mCB.SetData(cb);
 
 
@@ -62,17 +62,17 @@ HRESULT Dx2DRenderer::createBS()
 {
 	HRESULT hr;
 
-	// CD3D11_BLEND_DESC desc;
-	D3D11_BLEND_DESC desc = {};
+	CD3D11_BLEND_DESC desc;
+	// D3D11_BLEND_DESC desc = {};
 	desc.AlphaToCoverageEnable = true;
 	desc.IndependentBlendEnable = false;
 
 	desc.RenderTarget[0].BlendEnable = true;
-	desc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;// D3D11_BLEND_ONE;
+	desc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA; // D3D11_BLEND_SRC_ALPHA;// D3D11_BLEND_ONE;
 	desc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
 	desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
 
-	desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_SRC_ALPHA;// D3D11_BLEND_ONE;
+	desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_SRC_ALPHA; // D3D11_BLEND_SRC_ALPHA;// D3D11_BLEND_ONE;
 	desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA;
 	desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 
@@ -142,6 +142,14 @@ void Dx2DRenderer::Draw2(Dx2DRenderable2* sp, CollisionRect* rc)
 {
 	if (sp->tex.isNull()) {
 		sp->tex.mTextureRV = DxTextureMgr::get()->Find(sp->tex.mName);
+	}
+
+	if( ! isMeshColor(sp->color)) {
+		mMeshColor = sp->color;
+
+		CBChangesEveryFrame cb;
+		cb.vMeshColor = mMeshColor;
+		mCB.SetData(cb);
 	}
 
 	mQuad->Apply((Dx2DRenderable*)sp);

@@ -137,11 +137,13 @@
     <ClInclude Include="Actor1.h" />
     <ClInclude Include="AnimationData.h" />
     <ClInclude Include="base\MathBase.h" />
+    <ClInclude Include="base\MyUtils.h" />
     <ClInclude Include="base\RefObject.h" />
     <ClInclude Include="base\Vec2.h" />
     <ClInclude Include="CollisionMap1.h" />
     <ClInclude Include="Components.h" />
     <ClInclude Include="Components_inline.h" />
+    <ClInclude Include="CreateEntity.h" />
     <ClInclude Include="DemoGame.h" />
     <ClInclude Include="DemoGame1.h" />
     <ClInclude Include="framework.h" />
@@ -157,6 +159,8 @@
     <ClInclude Include="renderer\DxWindow.h" />
     <ClInclude Include="renderer\Quad.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Sys_Movement.h" />
+    <ClInclude Include="Sys_Render.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="tk\DDS.h" />
     <ClInclude Include="tk\DDSTextureLoader.h" />
@@ -168,9 +172,10 @@
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Actor1.cpp" />
+    <ClCompile Include="base\MyUtils.cpp" />
     <ClCompile Include="base\Vec2.cpp" />
     <ClCompile Include="CollisionMap1.cpp" />
-    <ClCompile Include="ECSystem.cpp" />
+    <ClCompile Include="Components_System.cpp" />
     <ClCompile Include="DemoGame.cpp" />
     <ClCompile Include="DemoGame1.cpp" />
     <ClCompile Include="Main.cpp" />

@@ -14,6 +14,8 @@
 #include <fstream>
 
 #include "base\Vec2.h"
+#include "base\MyUtils.h"
+#include "preDefines.h"
 #include "Components.h"
 
 

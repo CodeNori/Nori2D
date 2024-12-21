@@ -126,6 +126,6 @@ void register_components();
 void register_systems();
 void Update_system_all(float dt);
 void Render_system_all(float dt);
-void create_entity1();
-void create_entity2();
+void create_entity_Unit();
+void create_entity_House();
 

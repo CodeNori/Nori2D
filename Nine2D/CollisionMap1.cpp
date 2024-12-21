@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CollisionMap1.h"
 
+
 void CollisionMap1::Setup(float sx, float sy, int w, int h)
 {
     start_x = sx;
@@ -23,6 +24,9 @@ void CollisionMap1::Setup(float sx, float sy, int w, int h)
             rc.right = (float)((x+1)*PARTITIONS)  + start_x;
             rc.top = (float)((y+1)*PARTITIONS)  + start_y;
             rc.bottom = (float)(y*PARTITIONS) + start_y;
+
+        // OutputDebugString2("%d,%d = %0.1f,%0.1f,%0.1f,%0.1f,\n", x,y, rc.left, rc.right,rc.top, rc.bottom);
+        // OutputDebugString2("(%d,%d) = %0.1f - %0.1f\n", x,y, rc.top, rc.bottom);
         }
 
     events.clear();
@@ -118,6 +122,7 @@ void CollisionMap1::Insert2(CollisionRect* rc)
     }
 }
 
+void Set_CollisionFlag(ecs_id_t id1, ecs_id_t id2);
 
 void CollisionMap1::Collide() 
 {
@@ -125,8 +130,10 @@ void CollisionMap1::Collide()
         for (const CollisionRect& left : candidates) {
             for (const CollisionRect& right : candidates) {
                 if (left.id == right.id) continue;
-                if (isOverlapped(left, right))
-                    events.push_back({ left.id, right.id });
+                if (isOverlapped(left, right)) {
+                    //events.push_back({ left.id, right.id });
+                    Set_CollisionFlag(left.id, right.id);
+                }
             }
         }
     }
@@ -136,9 +143,7 @@ void CollisionMap1::DebugPrint()
 {
     for(auto it : grid) {        
         int sz = it.capacity();
-        char str[128];
-        sprintf_s(str,128, "capacity: %d\n", sz);
-        OutputDebugStringA(str);
+        OutputDebugString2("capacity: %d\n", sz);
     }
 
     OutputDebugStringA("--------- end --------");

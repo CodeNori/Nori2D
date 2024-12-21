@@ -46,6 +46,12 @@ public:
 	~Dx2DRenderer();
 	void Draw(Dx2DRenderable* sprite) override;
 	void Draw2(Dx2DRenderable2* sprite, CollisionRect* rc) override;
+	bool isMeshColor(XFloat4& c) { 
+		return mMeshColor.x == c.x && 
+				mMeshColor.y == c.y && 
+				mMeshColor.z == c.z &&
+				mMeshColor.w == c.w;
+	} 
 
 public:
 	VsShader*	mVS = nullptr;
@@ -55,6 +61,7 @@ public:
 
 	ID3D11SamplerState* mSamplerLinear = nullptr;
 	ID3D11BlendState*	mBlendState = nullptr;
+	XFloat4 mMeshColor;
 };
 
 

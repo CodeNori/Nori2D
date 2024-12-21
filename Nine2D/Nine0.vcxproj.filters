@@ -113,6 +113,18 @@
     <ClInclude Include="Components_inline.h">
       <Filter>ECS</Filter>
     </ClInclude>
+    <ClInclude Include="base\MyUtils.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateEntity.h">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Sys_Movement.h">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Sys_Render.h">
+      <Filter>ECS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tk\DDSTextureLoader.cpp">
@@ -150,7 +162,7 @@
     <ClCompile Include="DemoGame1.cpp">
       <Filter>ECS</Filter>
     </ClCompile>
-    <ClCompile Include="ECSystem.cpp">
+    <ClCompile Include="Components_System.cpp">
       <Filter>ECS</Filter>
     </ClCompile>
     <ClCompile Include="Actor1.cpp">
@@ -158,6 +170,9 @@
     </ClCompile>
     <ClCompile Include="CollisionMap1.cpp">
       <Filter>ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="base\MyUtils.cpp">
+      <Filter>base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

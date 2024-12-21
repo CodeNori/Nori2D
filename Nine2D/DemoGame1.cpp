@@ -5,7 +5,7 @@
 #include "Components.h"
 
 
-void create_entitys();
+
 
 
 DemoGame1::DemoGame1() 
@@ -39,15 +39,15 @@ void DemoGame1::Update(float delta)
 
 void DemoGame1::sample()
 {
-	for(int i=0; i<100; ++i)
-		create_entity1();
+	for(int i=0; i<1000; ++i)
+		create_entity_Unit();
 
-	create_entity2();
-	create_entity2();
-	create_entity2();
-	create_entity2();
-	create_entity2();
-	create_entity2();
+	create_entity_House();
+	create_entity_House();
+	create_entity_House();
+	create_entity_House();
+	create_entity_House();
+	create_entity_House();
 
 }
 

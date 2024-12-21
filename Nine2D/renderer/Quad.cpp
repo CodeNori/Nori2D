@@ -104,7 +104,12 @@ void CalcVERTEX(Dx2DRenderable* rd, VERTEX* vt)
 
 void Quad::Update(Dx2DRenderable* rd)
 {
-    VERTEX OurVertices[4];
+    VERTEX OurVertices[4] {
+		{-0.5f, -0.5f, 0.0f, 0.f, 1.f},
+		{-0.5f,  0.5f, 0.0f, 0.f, 0.f},
+		{ 0.5f, -0.5f, 0.0f, 1.f, 1.f},
+		{ 0.5f,  0.5f, 0.0f, 1.f, 0.f}	
+	};
 
 	if(rd->tex.mName != g_Tex_Name[1] )
 		DxTextureMgr::get()->GetUV(rd, OurVertices);
