@@ -6,7 +6,7 @@ ecs_ret_t Render_System_House(ecs_t* ecs,
                           void* udata)
 {
     Dx2DRenderable2 rd;
-    rd.color = {0.f, 0.f, 1.f, 1.f};
+    rd.color = {1.f, 1.f, 1.f, 1.f};
     rd.ancherX = 0.5f;
     rd.ancherY = 0.5f;
     rd.h = 100;
@@ -15,6 +15,10 @@ ecs_ret_t Render_System_House(ecs_t* ecs,
     rd.tex.mTextureRV = nullptr;
 
     (void)udata;
+
+    PsShader* psOld = g_ECS_Renderer->mPS;
+    g_ECS_Renderer->mPS = g_ECS_Renderer->mPScolor;
+
     printf("Render_System = %d \n", entity_count);
 
     for (int i = 0; i < entity_count; i++)
@@ -48,11 +52,23 @@ ecs_ret_t Render_System_House(ecs_t* ecs,
         img->dir = rd.dir;
     }   
 
+    g_ECS_Renderer->mPS = psOld;
     return 0;
 }
 
 
+void Toggle_PShader(ecs_dt_t dt)
+{
+    if(DxWindow::g->isSpaceKey_coolTime > 0.f)
+        DxWindow::g->isSpaceKey_coolTime -= dt;
 
+    if(DxWindow::g->isSpaceKey) {
+        if(DxWindow::g->isSpaceKey_coolTime <= 0.f ) {
+            g_ECS_Renderer->TogglePS();
+            DxWindow::g->isSpaceKey_coolTime = 0.5f;
+        }
+    }
+}
 
 ecs_ret_t Render_System_Unit(ecs_t* ecs,
                           ecs_id_t* entities,
@@ -71,6 +87,7 @@ ecs_ret_t Render_System_Unit(ecs_t* ecs,
 
     (void)udata;
     //printf("Render_System = %d \n", entity_count);
+    Toggle_PShader(dt);
 
     for (int i = 0; i < entity_count; i++)
     {
@@ -99,7 +116,7 @@ ecs_ret_t Render_System_Unit(ecs_t* ecs,
         if(*type >= 250)
             rd.color = {1.f, 0.f, 0.f, 1.f};
         else
-            rd.color = {0.5f, 0.5f, 0.5f, 1.f};
+            rd.color = {0.2f, 0.2f, 0.2f, 1.f};
 
 
         g_ECS_Renderer->Draw2(&rd, rect);

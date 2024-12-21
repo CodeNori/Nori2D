@@ -17,7 +17,9 @@ HRESULT Dx2DRenderer::create()
 	HRESULT hr;
 
 	mVS = new VsShader(L"VS.cso");
-	mPS = new PsShader(L"PS.cso");
+	mPS0 = new PsShader(L"PS.cso");
+	mPScolor = new PsShader(L"PS_color.cso");
+	mPS = mPS0;
 	mQuad = new Quad;
 
 	if (!mQuad->mVertexLayout) { 
@@ -72,8 +74,8 @@ HRESULT Dx2DRenderer::createBS()
 	desc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
 	desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
 
-	desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_SRC_ALPHA; // D3D11_BLEND_SRC_ALPHA;// D3D11_BLEND_ONE;
-	desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA;
+	desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE; // D3D11_BLEND_SRC_ALPHA;// D3D11_BLEND_ONE;
+	desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
 	desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 
 	desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
@@ -106,7 +108,8 @@ Dx2DRenderer::~Dx2DRenderer()
 {
 	//SAFE_RELEASE(mVertexBuffer);
 	SAFE_DELETE(mVS);
-	SAFE_DELETE(mPS);
+	SAFE_DELETE(mPS0);
+	SAFE_DELETE(mPScolor);
 	SAFE_DELETE(mQuad);
 }
 

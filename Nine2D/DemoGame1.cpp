@@ -23,11 +23,11 @@ DemoGame1::~DemoGame1()
 
 }
 
-extern IRenderer* g_ECS_Renderer;
+extern Dx2DRenderer* g_ECS_Renderer;
 
 void DemoGame1::Draw(IRenderer* rd)
 {
-	g_ECS_Renderer = rd;
+	g_ECS_Renderer = (Dx2DRenderer*)rd;
 	Render_system_all(g_Time.deltaTime);
 }
 

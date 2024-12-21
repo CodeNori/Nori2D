@@ -35,5 +35,6 @@ class IRenderer
 public:
 	virtual void Draw(Dx2DRenderable* sprite) = 0;
 	virtual void Draw2(Dx2DRenderable2* sprite, CollisionRect* rc) = 0;
+	virtual void TogglePS() = 0;
 };
 

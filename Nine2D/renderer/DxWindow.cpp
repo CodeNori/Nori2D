@@ -242,6 +242,12 @@ void DxWindow::MessageLoop()
 				//SystemsPlan::Plan->CreateModelGeometry(registry);
 			}		
 			*/
+			if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+				isSpaceKey = true;
+			else
+				isSpaceKey = false;
+
+
 			Update();
 			Draw();
 			// Draw(&mycompRender, obj_shaderClass, &cameraComponents, &mycompshaderstruct, &mycompPixel, &mycompvsStruct, &mycompPSStruct, obj_time, obj_SkyShader, obj_BoneDatMesh);

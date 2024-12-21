@@ -45,6 +45,7 @@ public:
 
 public:
 	const float colorBackG[4] = { 0.392156899f, 0.584313750f, 0.929411829f, 1.f };
-
+	bool isSpaceKey = false;
+	float isSpaceKey_coolTime = 0.f;
 };
 

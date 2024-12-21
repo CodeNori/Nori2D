@@ -53,9 +53,16 @@ public:
 				mMeshColor.w == c.w;
 	} 
 
+	void TogglePS() {
+		if(mPS == mPS0 ) mPS = mPScolor;
+		else mPS = mPS0;
+	}
 public:
 	VsShader*	mVS = nullptr;
 	PsShader*	mPS = nullptr;
+	PsShader*	mPScolor = nullptr;
+	PsShader*	mPS0 = nullptr;
+
 	Quad*		mQuad = nullptr;
 	ConstantBuffer<CBChangesEveryFrame> mCB;
 

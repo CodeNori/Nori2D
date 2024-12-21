@@ -1,7 +1,9 @@
 #include"pch.h"
 #include "base/Vec2.h"
 #include "renderer\Dx2DRenderable.h"
+#include "renderer\Dx2DRenderer.h"
 #include "CollisionMap1.h"
+#include "renderer\DxWindow.h"
 
 #define PICO_ECS_IMPLEMENTATION
 #include "pico\pico_ecs.h"
@@ -9,7 +11,7 @@
 
 ecs_t* ecs1 = NULL;
 nr::Vec2 g_CameraPos = {1280/2,720/2};
-IRenderer* g_ECS_Renderer = nullptr;
+Dx2DRenderer* g_ECS_Renderer = nullptr;
 
 // component IDs
 ecs_id_t PositionCompID;
