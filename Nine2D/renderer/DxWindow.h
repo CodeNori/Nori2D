@@ -44,7 +44,7 @@ public:
 	void UpdateTitleBarStats();
 
 public:
-	const float colorBackG[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	const float colorBackG[4] = { 0.392156899f, 0.584313750f, 0.929411829f, 1.f };
 
 };
 
