@@ -21,8 +21,8 @@ UltraRect& GetActorUV(Dx2DRenderable* rd)
 	{
 		rd->ancherX = 0.5f;
 		rd->ancherY = 0.5f;
-		rd->h = UltraFrameSizeF;
-		rd->w = UltraFrameSizeF;
+		rd->h = Ultra_FrameSizeF;
+		rd->w = Ultra_FrameSizeF;
 
 		UltraRect* frames = UltraFrameAni_Dir[rd->dir];
 		return frames[rd->frameNo];
