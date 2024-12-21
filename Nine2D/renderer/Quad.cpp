@@ -111,7 +111,7 @@ void Quad::Update(Dx2DRenderable* rd)
 		{ 0.5f,  0.5f, 0.0f, 1.f, 0.f}	
 	};
 
-	if(rd->tex.mName != g_Tex_Name[1] )
+	if(rd->tex.mName != g_Tex_Name[0] )
 		DxTextureMgr::get()->GetUV(rd, OurVertices);
 
 	CalcVERTEX(rd, OurVertices);

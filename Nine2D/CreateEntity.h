@@ -29,7 +29,7 @@ void create_entity_Unit()
     anchor->w = 48;
     anchor->h = 48;
 
-    img->texName = g_Tex_Name[2];
+    img->texName = g_Tex_Name[1];
     img->tex = nullptr;
 
 	img->frameNo = 0;
@@ -59,7 +59,7 @@ void create_entity_House()
     anchor->anchorY = 0.5f;
     anchor->w = 100;
     anchor->h = 100;
-    img->texName = g_Tex_Name[1];
+    img->texName = g_Tex_Name[0];
     img->tex = nullptr;
 
 	img->frameNo = 0;

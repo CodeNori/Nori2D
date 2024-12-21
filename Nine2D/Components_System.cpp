@@ -28,7 +28,6 @@ ecs_id_t RenderSysID1;
 ecs_id_t RenderSysID2;
 
 const WCHAR* g_Tex_Name[] = {
-    L"Image\\Carrot.png",
     L"Image\\TownHall.png",
     L"Image\\Ultralisk.png",
 };
