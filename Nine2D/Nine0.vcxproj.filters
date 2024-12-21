@@ -110,6 +110,9 @@
     <ClInclude Include="CollisionMap1.h">
       <Filter>ECS</Filter>
     </ClInclude>
+    <ClInclude Include="Components_inline.h">
+      <Filter>ECS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tk\DDSTextureLoader.cpp">

@@ -64,6 +64,7 @@ void register_components()
     HouseCompID  = ecs_register_component(ecs1, sizeof(char),  NULL, NULL);
     UnitCompID = ecs_register_component(ecs1, sizeof(char), NULL, NULL);
 
+    col_Map1.Setup(-256.f, -256.f, g_Dx11.width+512.f, g_Dx11.height+512.f );
 
 }
 
@@ -77,8 +78,11 @@ ecs_ret_t Movement_System(ecs_t* ecs,
 {
     (void)udata;
 
-    if (col_Map1.isEnabled)
-        col_Map1.Setup(0.f, 0.f, g_Dx11.width, g_Dx11.height );
+    if (col_Map1.isEnabled) {
+        //col_Map1.Clear();
+        //col_Map1.DebugPrint();
+        col_Map1.Setup(-256.f, -256.f, g_Dx11.width+512.f, g_Dx11.height+512.f );
+    }
 
     printf("Movement_System = %d \n", entity_count);
     float dt = dtt;
@@ -97,14 +101,14 @@ ecs_ret_t Movement_System(ecs_t* ecs,
         pos->y += dir->y * dt;
 
         {
-            rect->l = pos->x - (anchor->w * anchor->anchorX);
-            rect->t = pos->y + (anchor->h * anchor->anchorY);
-            rect->r = rect->l + anchor->w;
-            rect->b = rect->t - anchor->h;
+            rect->left = pos->x - (anchor->w * anchor->anchorX);
+            rect->top = pos->y + (anchor->h * anchor->anchorY);
+            rect->right = rect->left + anchor->w;
+            rect->bottom = rect->top - anchor->h;
             rect->id = id;
 
             if (col_Map1.isEnabled)
-                col_Map1.Insert(rect);
+                col_Map1.Insert2(rect);
         }
 
 

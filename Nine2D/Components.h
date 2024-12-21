@@ -105,7 +105,7 @@ struct Vertex_t
 
 struct CollisionRect
 {
-    float l, t, r, b;
+    float left, top, right, bottom;
 	ecs_id_t id;
 };
 
@@ -119,11 +119,13 @@ extern TimeData g_Time;
 extern nr::Vec2 g_CameraPos;
 extern ecs_t* ecs1;
 
+#include "Components_inline.h"
+
+
 void register_components();
 void register_systems();
 void Update_system_all(float dt);
 void Render_system_all(float dt);
 void create_entity1();
 void create_entity2();
-
 

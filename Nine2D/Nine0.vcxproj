@@ -141,6 +141,7 @@
     <ClInclude Include="base\Vec2.h" />
     <ClInclude Include="CollisionMap1.h" />
     <ClInclude Include="Components.h" />
+    <ClInclude Include="Components_inline.h" />
     <ClInclude Include="DemoGame.h" />
     <ClInclude Include="DemoGame1.h" />
     <ClInclude Include="framework.h" />
