@@ -64,7 +64,7 @@ void DemoGame::spawnUltra(int x, int y)
 	aa->mRd.dir = 0;
 	aa->mRd.frameNo = 0;
 	aa->mRd.AnimTime = 0;
-	aa->mRd.tex.mName = ULTRA_NAME;
+	aa->mRd.tex.mName = ULTRA_FILE_NAME;
 
 	auto mv1 = new MoveAction;
 	mv1->RandomTarget(aa);
@@ -87,7 +87,7 @@ void DemoGame::sample1()
 	aa->mRd.dir = 0;
 	aa->mRd.frameNo = 0;
 	aa->mRd.AnimTime = 0;
-	aa->mRd.tex.mName = ULTRA_NAME;
+	aa->mRd.tex.mName = ULTRA_FILE_NAME;
 
 	auto mv1 = new MoveAction;
 	mv1->RandomTarget(aa);

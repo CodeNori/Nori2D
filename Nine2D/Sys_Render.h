@@ -11,7 +11,7 @@ ecs_ret_t Render_System_House(ecs_t* ecs,
     rd.ancherY = 0.5f;
     rd.h = 100;
     rd.w = 100;
-    rd.tex.mName = g_Tex_Name[0];
+    rd.tex.mName = TOWNHALL_FILE_NAME;
     rd.tex.mTextureRV = nullptr;
 
     (void)udata;
@@ -82,7 +82,7 @@ ecs_ret_t Render_System_Unit(ecs_t* ecs,
     rd.ancherY = 0.5f;
     rd.h = 128;
     rd.w = 128;
-    rd.tex.mName = g_Tex_Name[1];
+    rd.tex.mName = ULTRA_FILE_NAME;
     rd.tex.mTextureRV = nullptr;
 
     (void)udata;

@@ -26,6 +26,9 @@
     <Filter Include="ECS">
       <UniqueIdentifier>{023661de-46d5-4ed8-ba95-14261cb59f02}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ECS\Animation">
+      <UniqueIdentifier>{a4e4279a-456e-4d21-acdc-eefefcf8ff3c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tk\DDS.h">
@@ -96,7 +99,6 @@
     <ClInclude Include="renderer\Quad.h">
       <Filter>Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationData.h" />
     <ClInclude Include="preDefines.h" />
     <ClInclude Include="Components.h">
       <Filter>ECS</Filter>
@@ -124,6 +126,12 @@
     </ClInclude>
     <ClInclude Include="Sys_Render.h">
       <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationData.h">
+      <Filter>ECS\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="animation_data\Ultra_AD.h">
+      <Filter>ECS\Animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

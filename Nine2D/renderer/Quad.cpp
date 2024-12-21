@@ -8,7 +8,6 @@ using namespace DirectX;
 ID3D11InputLayout*  Quad::mVertexLayout = nullptr;
 
 // VERTEX gVT[4*1000]; 
-extern const WCHAR* g_Tex_Name[];
 
 void RenderableToVertex(VERTEX* vt, Dx2DRenderable* rd)
 {
@@ -111,7 +110,7 @@ void Quad::Update(Dx2DRenderable* rd)
 		{ 0.5f,  0.5f, 0.0f, 1.f, 0.f}	
 	};
 
-	if(rd->tex.mName != g_Tex_Name[0] )
+	if(rd->tex.mName != TOWNHALL_FILE_NAME )
 		DxTextureMgr::get()->GetUV(rd, OurVertices);
 
 	CalcVERTEX(rd, OurVertices);
