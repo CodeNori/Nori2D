@@ -16,7 +16,7 @@ public:
 	void getMouse(int x, int y) override;
 	void spawnUltra(int x, int y);
 	void Update(float delta) override;
-	void Draw(IRenderer* rd) override;
+	void Draw(void* param) override;
 
 
 };

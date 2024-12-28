@@ -4,6 +4,7 @@
 #include "ConstantBuffer.h"
 
 struct Dx2DRenderable;
+struct Dx2DRenderable2;
 struct VERTEX;
 
 struct STexture
@@ -47,6 +48,7 @@ public:
 	bool Delete(DxTexture* tex);
 	void DestroyAll();
 	void GetUV(Dx2DRenderable* rd, VERTEX* Vt);
+	void GetUV2(Dx2DRenderable2* rd, VERTEX* Vt);
 	ID3D11ShaderResourceView* Find(const WCHAR* name);
 
 	std::map<std::wstring, ID3D11ShaderResourceView*> mTexMap;

@@ -34,7 +34,7 @@
  * @{
  */
 
-namespace nr {
+namespace ax {
 
 /** Clamp a value between from and to.
  */

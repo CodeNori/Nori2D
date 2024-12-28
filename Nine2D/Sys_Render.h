@@ -98,6 +98,7 @@ ecs_ret_t Render_System_Unit(ecs_t* ecs,
         Img_t* img = (Img_t*)ecs_get(ecs, id, TextureCompID);
         CollisionRect* rect = (CollisionRect*)ecs_get(ecs, id, RectCompID);
         BYTE* type = (BYTE*)ecs_get(ecs, id, UnitCompID);
+        Velocity_t* vel = (Velocity_t*)ecs_get(ecs, id, VelocityCompID);
 
         rd.position.x = pos->x;
         rd.position.y = pos->y;
@@ -117,6 +118,8 @@ ecs_ret_t Render_System_Unit(ecs_t* ecs,
             rd.color = {1.f, 0.f, 0.f, 1.f};
         else
             rd.color = {0.2f, 0.2f, 0.2f, 1.f};
+
+        rd.vel = vel->dir;
 
 
         g_ECS_Renderer->Draw2(&rd, rect);

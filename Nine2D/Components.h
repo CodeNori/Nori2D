@@ -79,7 +79,8 @@ struct Pos_t
 
 struct Velocity_t
 {
-    float vx, vy;
+    Vec2 dir;
+	float speed;
 };
 
 struct Img_t
@@ -116,10 +117,11 @@ struct CollisionEvent
 
 extern Dx11Vars g_Dx11;
 extern TimeData g_Time;
-extern nr::Vec2 g_CameraPos;
+extern ax::Vec2 g_CameraPos;
 extern ecs_t* ecs1;
 
 #include "Components_inline.h"
+#include "Components_tower.h"
 
 
 void register_components();

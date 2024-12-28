@@ -19,14 +19,14 @@ DemoGame::~DemoGame()
 	}
 }
 
-void DemoGame::Draw(IRenderer* rd)
+void DemoGame::Draw(void* param)
 {
 
 	std::sort(mActorList.begin(), mActorList.end(), compare);
 
 	for(int i=0; i<mActorList.size(); ++i)
 	{
-		rd->Draw(&mActorList[i]->mRd);
+		mRD->Draw(&mActorList[i]->mRd);
 	}
 }
 

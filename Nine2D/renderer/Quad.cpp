@@ -111,7 +111,7 @@ void Quad::Update(Dx2DRenderable* rd)
 	};
 
 	if(rd->tex.mName != TOWNHALL_FILE_NAME )
-		DxTextureMgr::get()->GetUV(rd, OurVertices);
+		DxTextureMgr::get()->GetUV2( (Dx2DRenderable2*)rd, OurVertices);
 
 	CalcVERTEX(rd, OurVertices);
 

@@ -10,7 +10,7 @@
 
 
 ecs_t* ecs1 = NULL;
-nr::Vec2 g_CameraPos = {1280/2,720/2};
+Vec2 g_CameraPos = {1280/2,720/2};
 Dx2DRenderer* g_ECS_Renderer = nullptr;
 
 // component IDs
@@ -96,6 +96,7 @@ void register_systems()
     ecs_require_component(ecs1, RenderSysID2, PositionCompID);
     ecs_require_component(ecs1, RenderSysID2, TextureCompID);
     ecs_require_component(ecs1, RenderSysID2, UnitCompID);
+    ecs_require_component(ecs1, RenderSysID2, VelocityCompID);
 }
 
 void Render_system_all(float dt)

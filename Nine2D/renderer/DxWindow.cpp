@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "DxImGui.h"
 #include "DxWindow.h"
 #include "Components.h"
 #include <WindowsX.h>
@@ -16,10 +17,12 @@ DxWindow::DxWindow()
 	g = this;
 	InitWindow();
 	InitDirectX();
+    mImGui = new DxImGui(g_Dx11.hWnd, g_Dx11.device, g_Dx11.context);
 }
 
 DxWindow::~DxWindow()
 {
+	SAFE_DELETE(mImGui);
 	SAFE_RELEASE(g_Dx11.context)
 	SAFE_RELEASE(g_Dx11.depthStencilView)
 	SAFE_RELEASE(g_Dx11.backBufferRTV)
@@ -29,6 +32,9 @@ DxWindow::~DxWindow()
 
 LRESULT DxWindow::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+	if (DxImGui::g->WndProc(hWnd, uMsg, wParam, lParam))
+		return 1;
+
 	return g->onMessage(hWnd, uMsg, wParam, lParam);
 }
 
@@ -185,10 +191,8 @@ HRESULT DxWindow::InitDirectX()
 }
 
 
-HRESULT DxWindow::Run(IGame* game, IRenderer* rd)
+HRESULT DxWindow::Run()
 {
-	mRenderer = rd;
-	mGameObj = game;
 
  	// Grab the start time now that
 	// the game loop is running
@@ -345,7 +349,7 @@ void DxWindow::OnMouseDown(WPARAM buttonState, int x, int y)
 	
 	prevMousePos.x = x;
 	prevMousePos.y = g_Dx11.height - y;
-	mGameObj->getMouse(prevMousePos.x, prevMousePos.y);
+	if(mMouseFunc) mMouseFunc(prevMousePos.x, prevMousePos.y);
 	// Caputure the mouse so we keep getting mouse move
 	// events even if the mouse leaves the window.  we'll be
 	// releasing the capture once a mouse button is released
@@ -388,7 +392,8 @@ void DxWindow::OnMouseWheel(float wheelDelta, int x, int y)
 
 void DxWindow::Update()
 {
-	if(mGameObj) mGameObj->Update(g_Time.deltaTime);
+	if(mUpdateFunc) 
+		mUpdateFunc(g_Time.deltaTime);
 }
 
 void DxWindow::Draw()
@@ -402,13 +407,31 @@ void DxWindow::Draw()
 												 D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,
 												 1.0f,
 												 0);
+	if(mRenderFunc) 
+		mRenderFunc(nullptr);
 
-	if(mGameObj) mGameObj->Draw(mRenderer);
-
+	DrawGUI();
 
 	g_Dx11.swapChain->Present(0, 0);
 	
 	g_Dx11.context->OMSetRenderTargets(1, &g_Dx11.backBufferRTV, g_Dx11.depthStencilView);
+
+}
+
+void DxWindow::DrawGUI()
+{
+	DxImGui::g->Start();
+	{
+		if(mImGuiRenderFunc)
+			mImGuiRenderFunc(nullptr);
+		else {
+			if(show_demo_window)
+			ImGui::ShowDemoWindow(&show_demo_window);
+		}
+
+	}
+	DxImGui::g->End();
+	DxImGui::g->RenderToDX();
 
 }
 

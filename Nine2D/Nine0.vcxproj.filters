@@ -29,6 +29,15 @@
     <Filter Include="ECS\Animation">
       <UniqueIdentifier>{a4e4279a-456e-4d21-acdc-eefefcf8ff3c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tower">
+      <UniqueIdentifier>{16a183e0-aea2-4adf-8341-412addab62a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imGui">
+      <UniqueIdentifier>{0754eabe-2832-4b8f-b0ad-dcf6efb4f707}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imGui\lib">
+      <UniqueIdentifier>{6a16adf7-842d-481f-aa49-d14deeb440d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tk\DDS.h">
@@ -49,7 +58,6 @@
     <ClInclude Include="tk\WICTextureLoader.h">
       <Filter>tk</Filter>
     </ClInclude>
-    <ClInclude Include="DemoGame.h" />
     <ClInclude Include="framework.h">
       <Filter>WinMain</Filter>
     </ClInclude>
@@ -65,7 +73,6 @@
     <ClInclude Include="targetver.h">
       <Filter>WinMain</Filter>
     </ClInclude>
-    <ClInclude Include="Actor.h" />
     <ClInclude Include="IGame.h">
       <Filter>DX</Filter>
     </ClInclude>
@@ -133,6 +140,33 @@
     <ClInclude Include="animation_data\Ultra_AD.h">
       <Filter>ECS\Animation</Filter>
     </ClInclude>
+    <ClInclude Include="Components_tower.h">
+      <Filter>Tower</Filter>
+    </ClInclude>
+    <ClInclude Include="System_tower.h">
+      <Filter>Tower</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imconfig.h">
+      <Filter>imGui\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui.h">
+      <Filter>imGui\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_dx11.h">
+      <Filter>imGui\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_win32.h">
+      <Filter>imGui\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_internal.h">
+      <Filter>imGui\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="DxImGui.h">
+      <Filter>imGui</Filter>
+    </ClInclude>
+    <ClInclude Include="animation_data\Farmer_AD.h">
+      <Filter>ECS\Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tk\DDSTextureLoader.cpp">
@@ -141,14 +175,12 @@
     <ClCompile Include="tk\WICTextureLoader.cpp">
       <Filter>tk</Filter>
     </ClCompile>
-    <ClCompile Include="DemoGame.cpp" />
     <ClCompile Include="Main.cpp">
       <Filter>WinMain</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>WinMain</Filter>
     </ClCompile>
-    <ClCompile Include="Actor.cpp" />
     <ClCompile Include="base\Vec2.cpp">
       <Filter>base</Filter>
     </ClCompile>
@@ -181,6 +213,30 @@
     </ClCompile>
     <ClCompile Include="base\MyUtils.cpp">
       <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui.cpp">
+      <Filter>imGui\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_demo.cpp">
+      <Filter>imGui\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_draw.cpp">
+      <Filter>imGui\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_dx11.cpp">
+      <Filter>imGui\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_win32.cpp">
+      <Filter>imGui\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_tables.cpp">
+      <Filter>imGui\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_widgets.cpp">
+      <Filter>imGui\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="DxImGui.cpp">
+      <Filter>imGui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

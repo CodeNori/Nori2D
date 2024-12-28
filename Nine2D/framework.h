@@ -16,6 +16,12 @@
 #include "base\Vec2.h"
 #include "base\MyUtils.h"
 #include "preDefines.h"
+
+typedef DirectX::XMFLOAT2 XFloat2;
+typedef DirectX::XMFLOAT3 XFloat3;
+typedef DirectX::XMFLOAT4 XFloat4; 
+typedef ax::Vec2 Vec2; 
+
 #include "Components.h"
 
 
@@ -23,11 +29,6 @@
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "d3dcompiler.lib")
 
-
-typedef DirectX::XMFLOAT2 XFloat2;
-typedef DirectX::XMFLOAT3 XFloat3;
-typedef DirectX::XMFLOAT4 XFloat4; 
-typedef nr::Vec2 Vec2; 
 
 
 

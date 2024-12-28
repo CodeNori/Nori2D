@@ -27,6 +27,8 @@ struct Dx2DRenderable : public Renderable
 struct Dx2DRenderable2 : public Renderable
 {
 	STexture tex;
+
+	Vec2 vel;
 };
 
 
@@ -37,4 +39,5 @@ public:
 	virtual void Draw2(Dx2DRenderable2* sprite, CollisionRect* rc) = 0;
 	virtual void TogglePS() = 0;
 };
+
 

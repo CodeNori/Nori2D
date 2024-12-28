@@ -11,9 +11,6 @@ public:
 	DxWindow();
 	~DxWindow();
 
-	IGame* mGameObj = nullptr;
-	IRenderer* mRenderer = nullptr;
-
 	static DxWindow* g;
 
 	static LRESULT CALLBACK WindowProc(
@@ -25,9 +22,10 @@ public:
 
 	HRESULT InitWindow();
 	HRESULT InitDirectX();	
-	HRESULT Run(IGame* game, IRenderer* rd);
+	HRESULT Run();
 	void Update();
 	void Draw();
+	void DrawGUI();
 	void MessageLoop();
 
 	LRESULT onMessage(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -47,5 +45,14 @@ public:
 	const float colorBackG[4] = { 0.392156899f, 0.584313750f, 0.929411829f, 1.f };
 	bool isSpaceKey = false;
 	float isSpaceKey_coolTime = 0.f;
+
+	std::function<void(int x, int y)> mMouseFunc = nullptr;
+	std::function<void(float delta)> mUpdateFunc = nullptr;
+	std::function<void(void* rd)> mRenderFunc = nullptr;
+	std::function<void(void* lparam)> mImGuiRenderFunc = nullptr;
+
+private:
+	class DxImGui* mImGui = nullptr;
+	bool show_demo_window = true;
 };
 

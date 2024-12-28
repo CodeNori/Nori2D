@@ -22,7 +22,7 @@
 #include "Vec2.h"
 
 
-namespace nr {
+namespace ax {
 
 
     const Vec2 Vec2::ZERO(0.0f, 0.0f);

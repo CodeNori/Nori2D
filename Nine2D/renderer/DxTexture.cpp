@@ -103,6 +103,31 @@ void DxTextureMgr::GetUV(Dx2DRenderable* rd, VERTEX* Vt)
 
 }
 
+void DxTextureMgr::GetUV2(Dx2DRenderable2* rd, VERTEX* Vt)
+{
+	AnimRectTime animTime = GetActorTime((Dx2DRenderable*)rd);
+
+	float FrameTime = animTime.totalTime / animTime.totalFrame;
+
+	rd->AnimTime += g_Time.deltaTime;
+
+	if (rd->AnimTime >= FrameTime)
+	{
+		rd->frameNo++;
+		rd->AnimTime -= FrameTime;
+		if (rd->frameNo >= animTime.totalFrame)
+			rd->frameNo = 0;
+	}
+
+	UltraRect uv = GetActorUV2(rd);
+
+	Vt[0].U = uv.U1; Vt[0].V = uv.V2;
+	Vt[1].U = uv.U1; Vt[1].V = uv.V1;
+	Vt[2].U = uv.U2; Vt[2].V = uv.V2;
+	Vt[3].U = uv.U2; Vt[3].V = uv.V1;
+
+}
+
 ID3D11ShaderResourceView* DxTextureMgr::Find(const WCHAR* name)
 {
 	std::map<std::wstring, ID3D11ShaderResourceView*>::iterator it

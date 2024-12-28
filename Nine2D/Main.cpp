@@ -7,7 +7,7 @@
 #include "renderer\Dx2DRenderer.h"
 #include "DemoGame.h"
 #include "DemoGame1.h"
-
+#include "DxImGui.h"
 
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -32,11 +32,17 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     g_Dx11.half_height = (720 / 2);
 
     DxWindow* gDx = new DxWindow;
+
 	Dx2DRenderer* gRender = new Dx2DRenderer;
     DemoGame1* demo = new DemoGame1;
     demo->sample();
+    demo->mRD = gRender;
 
-    gDx->Run(demo,gRender);
+    gDx->mMouseFunc = AX_CALLBACK_2(DemoGame1::getMouse, demo);
+    gDx->mUpdateFunc = AX_CALLBACK_1(DemoGame1::Update, demo);
+    gDx->mRenderFunc = AX_CALLBACK_1(DemoGame1::Draw, demo);
+    gDx->mImGuiRenderFunc = AX_CALLBACK_1(DemoGame1::DrawGui, demo);
+    gDx->Run();
 
     delete demo;
     delete gRender;

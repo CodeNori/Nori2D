@@ -1,0 +1,38 @@
+/* -----------------------------------------------------
+   created with https://www.codeandweb.com/texturepacker 
+   -----------------------------------------------------
+   $TexturePacker:SmartUpdate:4b06f22682b997f2caf4294c2915e97d:ec5d86dd1e38c2a46fb67250e7eca467:3d33f29117c14b36f599c660b121c0e2$
+   -----------------------------------------------------
+
+   usage: <span class="{-spritename-} sprite"></span>
+
+   replace {-spritename-} with the sprite you like to use
+
+*/
+
+.sprite {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(farmer11.png);}
+
+.Farmer-Move-Back-0001 {width:32px; height:32px; background-position: -0px -0px}
+.Farmer-Move-Back-0002 {width:32px; height:32px; background-position: -32px -0px}
+.Farmer-Move-Back-0003 {width:32px; height:32px; background-position: -64px -0px}
+.Farmer-Move-Back-0004 {width:32px; height:32px; background-position: -96px -0px}
+.Farmer-Move-Back-0005 {width:32px; height:32px; background-position: -128px -0px}
+.Farmer-Move-Back-0006 {width:32px; height:32px; background-position: -160px -0px}
+.Farmer-Move-Face-0001 {width:32px; height:32px; background-position: -192px -0px}
+.Farmer-Move-Face-0002 {width:32px; height:32px; background-position: -224px -0px}
+.Farmer-Move-Face-0003 {width:32px; height:32px; background-position: -0px -32px}
+.Farmer-Move-Face-0004 {width:32px; height:32px; background-position: -32px -32px}
+.Farmer-Move-Face-0005 {width:32px; height:32px; background-position: -64px -32px}
+.Farmer-Move-Face-0006 {width:32px; height:32px; background-position: -96px -32px}
+.Farmer-Move-Left-0001 {width:32px; height:32px; background-position: -128px -32px}
+.Farmer-Move-Left-0002 {width:32px; height:32px; background-position: -160px -32px}
+.Farmer-Move-Left-0003 {width:32px; height:32px; background-position: -192px -32px}
+.Farmer-Move-Left-0004 {width:32px; height:32px; background-position: -224px -32px}
+.Farmer-Move-Left-0005 {width:32px; height:32px; background-position: -0px -64px}
+.Farmer-Move-Left-0006 {width:32px; height:32px; background-position: -32px -64px}
+.Farmer-Move-Right-0001 {width:32px; height:32px; background-position: -64px -64px}
+.Farmer-Move-Right-0002 {width:32px; height:32px; background-position: -96px -64px}
+.Farmer-Move-Right-0003 {width:32px; height:32px; background-position: -128px -64px}
+.Farmer-Move-Right-0004 {width:32px; height:32px; background-position: -160px -64px}
+.Farmer-Move-Right-0005 {width:32px; height:32px; background-position: -192px -64px}
+.Farmer-Move-Right-0006 {width:32px; height:32px; background-position: -224px -64px}

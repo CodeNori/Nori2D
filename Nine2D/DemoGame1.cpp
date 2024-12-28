@@ -4,6 +4,7 @@
 #include "Actor.h"
 #include "Components.h"
 
+#include "DxImGui.h"
 
 
 
@@ -25,10 +26,41 @@ DemoGame1::~DemoGame1()
 
 extern Dx2DRenderer* g_ECS_Renderer;
 
-void DemoGame1::Draw(IRenderer* rd)
+void DemoGame1::Draw(void* param)
 {
-	g_ECS_Renderer = (Dx2DRenderer*)rd;
+	g_ECS_Renderer = mRD;
 	Render_system_all(g_Time.deltaTime);
+}
+
+void DemoGame1::DrawGui(void* param)
+{
+    if (!ImGui::Begin("Game1"))
+    {
+        // Early out if the window is collapsed, as an optimization.
+        ImGui::End();
+        return;
+    }
+
+    if (ImGui::CollapsingHeader("Actor"))
+    {
+        ImGui::SeparatorText("ABOUT THIS DEMO:");
+        ImGui::BulletText("Sections below are demonstrating many aspects of the library.");
+        ImGui::BulletText("The \"Examples\" menu above leads to more demo contents.");
+        ImGui::BulletText("The \"Tools\" menu above gives access to: About Box, Style Editor,\n"
+                          "and Metrics/Debugger (general purpose Dear ImGui debugging tool).");
+
+        ImGui::SeparatorText("PROGRAMMER GUIDE:");
+        ImGui::BulletText("See the ShowDemoWindow()");
+        ImGui::BulletText("See comments in imgui.cpp.");
+        ImGui::BulletText("See example applications in the examples/ folder.");
+        ImGui::BulletText("Read the FAQ at https://www.dearimgui.com/faq/");
+        ImGui::BulletText("Set 'io.ConfigFlags |= NavEnableKeyboard' for keyboard controls.");
+        ImGui::BulletText("Set 'io.ConfigFlags |= NavEnableGamepad' for gamepad controls.");
+    }
+
+	ImGui::End();
+
+	DxImGui::g->TextOutU8(DxImGui::g->m_korFont, 36, 10, 10, u8"±è´ë¿í");
 }
 
 void DemoGame1::Update(float delta)

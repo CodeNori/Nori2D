@@ -1,8 +1,11 @@
 
 #define Ultra_PngWidth (2048)
+#define Ultra_PngHeight (2048)
 #define Ultra_FrameSize 128
 #define Ultra_FrameSizeF 128.f
 #define Ultra_FrameAnimationTime 1.5f
+#define Ultra_FrameAnimationTime 1.5f
+
 
 #define Ultra_UV(x) ( ((float)((x)*Ultra_FrameSize)) / ((float)Ultra_PngWidth) )
 #define Ultra_UV_Rect(u,v) { Ultra_UV(u), Ultra_UV(v), Ultra_UV(u+1), Ultra_UV(v+1) }

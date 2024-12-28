@@ -8,7 +8,7 @@ void create_entity_Unit()
 
     // Add components
     Pos_t* pos = (Pos_t*)ecs_add(ecs1, id, PositionCompID, NULL);
-    Vec2*  dir = (Vec2*)ecs_add(ecs1, id, VelocityCompID, NULL);
+    Velocity_t*  dir = (Velocity_t*)ecs_add(ecs1, id, VelocityCompID, NULL);
     Img_t*  img = (Img_t*)ecs_add(ecs1, id, TextureCompID, NULL);
     BYTE* type = (BYTE*)ecs_add(ecs1, id, UnitCompID, NULL);
     Anchor_t* anchor = (Anchor_t*)ecs_add(ecs1, id, AnchorCompID, NULL);
@@ -22,14 +22,15 @@ void create_entity_Unit()
     Vec2 p = ScreenToWorld({x,y});
     *pos = { p.x,p.y,0.f };
     
-    *dir = GetRandomDir()* 100.f;
+    dir->dir = GetRandomDir();
+    dir->speed = 50.f;
 
     anchor->anchorX = 0.5f;
     anchor->anchorY = 0.5f;
-    anchor->w = 48;
-    anchor->h = 48;
+    anchor->w = 16;
+    anchor->h = 16;
 
-    img->texName = ULTRA_FILE_NAME;
+    img->texName = FARMER_FILE_NAME;
     img->tex = nullptr;
 
 	img->frameNo = 0;
