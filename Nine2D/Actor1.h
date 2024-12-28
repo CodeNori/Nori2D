@@ -10,5 +10,6 @@ struct Color4
 
 class Actor1
 {
+public:
 
 };

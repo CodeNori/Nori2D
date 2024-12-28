@@ -44,7 +44,6 @@ public:
 
 	Dx2DRenderer() { g=this; create(); }
 	~Dx2DRenderer();
-	void Draw(Dx2DRenderable* sprite) override;
 	void Draw2(Dx2DRenderable2* sprite, CollisionRect* rc) override;
 	bool isMeshColor(XFloat4& c) { 
 		return mMeshColor.x == c.x && 
@@ -57,6 +56,10 @@ public:
 		if(mPS == mPS0 ) mPS = mPScolor;
 		else mPS = mPS0;
 	}
+
+	void SetTexturedPS() { mPS = mPScolor; }
+	void SetColoredPS() { mPS = mPS0; }
+
 public:
 	VsShader*	mVS = nullptr;
 	PsShader*	mPS = nullptr;

@@ -9,6 +9,7 @@
 #include "DemoGame1.h"
 #include "DxImGui.h"
 
+extern Dx2DRenderer* g_ECS_Renderer;
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -34,9 +35,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     DxWindow* gDx = new DxWindow;
 
 	Dx2DRenderer* gRender = new Dx2DRenderer;
+    g_ECS_Renderer = gRender;
+
     DemoGame1* demo = new DemoGame1;
     demo->sample();
-    demo->mRD = gRender;
 
     gDx->mMouseFunc = AX_CALLBACK_2(DemoGame1::getMouse, demo);
     gDx->mUpdateFunc = AX_CALLBACK_1(DemoGame1::Update, demo);

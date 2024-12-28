@@ -10,9 +10,8 @@ public:
 	~Quad();
 	HRESULT createInputLayout(ID3DBlob* mBlob);
 
-	void Update(Dx2DRenderable* rd);
-	void Draw(Dx2DRenderable* sp);
-	void Apply(Dx2DRenderable* sp);
+	void Update(Dx2DRenderable2* rd);
+	void Apply(Dx2DRenderable2* sp);
 
 	int mVertexCount = 4;
 	ID3D11Buffer *mVertexBuffer = nullptr;  

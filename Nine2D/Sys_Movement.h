@@ -1,6 +1,9 @@
 
+CollisionMap1 col_Map1;
 
-void Set_CollisionFlag(ecs_id_t id1, ecs_id_t id2)
+
+
+void Push_CollisionFlag(ecs_id_t id1, ecs_id_t id2)
 {
         BYTE* type1 = (BYTE*)ecs_get(ecs1, id1, UnitCompID);
         BYTE* type2 = (BYTE*)ecs_get(ecs1, id2, UnitCompID);
@@ -18,6 +21,24 @@ Vec2 GetRandomDir()
     p = p.rotateByAngle(Vec2::ZERO, radian);
 
     return p;
+}
+
+
+void 영역밖이면_안쪽으로_속도변경(Pos_t* pos, Velocity_t* vel)
+{
+    float Scn_left   = g_CameraPos.x - g_Dx11.half_width   - 1024;
+    float Scn_right  = g_CameraPos.x + g_Dx11.half_width   + 1024;
+    float Scn_top    = g_CameraPos.y + g_Dx11.half_height  + 1024;
+    float Scn_bottom = g_CameraPos.y - g_Dx11.half_height  - 1024;
+    if (pos->x < Scn_left  ||
+        pos->x > Scn_right ||
+        pos->y < Scn_bottom||
+        pos->y > Scn_top)
+    {
+        vel->dir = GetRandomDir();
+        vel->speed = 50.f;
+    }
+
 }
 
 
@@ -48,40 +69,37 @@ ecs_ret_t Movement_System(ecs_t* ecs,
         CollisionRect* rect = (CollisionRect*)ecs_get(ecs, id, RectCompID);
         BYTE* type = (BYTE*)ecs_get(ecs, id, UnitCompID);
 
-        pos->x += vel->dir.x * vel->speed * dt;
-        pos->y += vel->dir.y * vel->speed * dt;
+        //
+        //  위치 이동.....
+        //
+        pos->x += (vel->dir.x * vel->speed) * dt;
+        pos->y += (vel->dir.y * vel->speed) * dt;
 
-        {
-            rect->left = pos->x - (anchor->w * anchor->anchorX);
-            rect->top = pos->y + (anchor->h * anchor->anchorY);
-            rect->right = rect->left + anchor->w;
-            rect->bottom = rect->top - anchor->h;
-            rect->id = id;
+        //
+        //  Rectangle 계산.....
+        //
+        rect->left = pos->x - (anchor->w * anchor->anchorX);
+        rect->top = pos->y + (anchor->h * anchor->anchorY);
+        rect->right = rect->left + anchor->w;
+        rect->bottom = rect->top - anchor->h;
+        rect->id = id;
 
-            if (col_Map1.isEnabled) {
-                col_Map1.Insert2(rect);
-                *type = 0;
-            }
+        //
+        //  Physics ....
+        //
+        if (col_Map1.isEnabled) {
+            col_Map1.Insert2(rect);
+            *type = 0;
         }
 
 
-
-        float Scn_left =  g_CameraPos.x-g_Dx11.half_width      - 1024;
-        float Scn_right = g_CameraPos.x + g_Dx11.half_width    + 1024;
-        float Scn_top = g_CameraPos.y + g_Dx11.half_height     + 1024;
-        float Scn_bottom = g_CameraPos.y - g_Dx11.half_height  - 1024;
-        if (pos->x < Scn_left  ||
-            pos->x > Scn_right ||
-            pos->y < Scn_bottom||
-            pos->y > Scn_top)
-        {
-            vel->dir = GetRandomDir();
-            vel->speed = 50.f;
-        }
-
+        영역밖이면_안쪽으로_속도변경(pos, vel);
     }
 
 
+    //
+    //  Physics ....
+    //
     if(col_Map1.isEnabled) {
         col_Map1.Collide();
         

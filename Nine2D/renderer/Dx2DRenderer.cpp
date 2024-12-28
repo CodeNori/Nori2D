@@ -116,30 +116,6 @@ Dx2DRenderer::~Dx2DRenderer()
 
 
 
-void Dx2DRenderer::Draw(Dx2DRenderable* sp)
-{
-	if(sp->tex.isNull()) {
-		//sp->tex.Load()
-		DxTextureMgr::get()->New(sp->tex);
-	}
-	mQuad->Apply(sp);
-
-	CBChangesEveryFrame cb;
-	cb.vMeshColor = sp->color;
-	mCB.SetData(cb);
-
-	mVS->Apply();
-	mPS->Apply();
-
-	g_Dx11.context->PSSetConstantBuffers(0, 1, &mCB.mConstantBuffer);
-	g_Dx11.context->PSSetSamplers(0, 1, &mSamplerLinear);
-	sp->tex.Draw();
-
-	g_Dx11.context->OMSetBlendState(mBlendState, 0, 0xFFFFFFFF);
-	g_Dx11.context->Draw(mQuad->mVertexCount, 0);
-}
-
-
 
 void Dx2DRenderer::Draw2(Dx2DRenderable2* sp, CollisionRect* rc)
 {
@@ -155,7 +131,7 @@ void Dx2DRenderer::Draw2(Dx2DRenderable2* sp, CollisionRect* rc)
 		mCB.SetData(cb);
 	}
 
-	mQuad->Apply((Dx2DRenderable*)sp);
+	mQuad->Apply(sp);
 	mVS->Apply();
 	mPS->Apply();
 

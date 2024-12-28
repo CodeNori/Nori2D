@@ -141,6 +141,7 @@
     <ClInclude Include="base\MyUtils.h" />
     <ClInclude Include="base\RefObject.h" />
     <ClInclude Include="base\Vec2.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="CollisionMap1.h" />
     <ClInclude Include="Components.h" />
     <ClInclude Include="Components_inline.h" />
@@ -181,8 +182,10 @@
     <ClCompile Include="Actor1.cpp" />
     <ClCompile Include="base\MyUtils.cpp" />
     <ClCompile Include="base\Vec2.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CollisionMap1.cpp" />
-    <ClCompile Include="Components_System.cpp" />
+    <ClCompile Include="Components.cpp" />
+    <ClCompile Include="ECSystem.cpp" />
     <ClCompile Include="DemoGame1.cpp" />
     <ClCompile Include="DxImGui.cpp" />
     <ClCompile Include="imgui\imgui.cpp">

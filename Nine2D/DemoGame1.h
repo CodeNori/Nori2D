@@ -6,6 +6,7 @@ class DemoGame1
 {
 	std::vector<Actor1*>  mActorList;
 	int count = 0;
+	bool isTexturedDraw = false;
 
 public:
 	DemoGame1();
@@ -16,7 +17,5 @@ public:
 	void Draw(void* param);
 	void DrawGui(void* param);
 
-public:
-	class Dx2DRenderer* mRD = nullptr;
 };
 

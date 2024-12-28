@@ -3,6 +3,7 @@
 #include "DxWindow.h"
 #include "Components.h"
 #include <WindowsX.h>
+#include "Camera.h"
 
 TimeData g_Time;
 Dx11Vars g_Dx11;
@@ -250,6 +251,11 @@ void DxWindow::MessageLoop()
 				isSpaceKey = true;
 			else
 				isSpaceKey = false;
+
+			if (GetAsyncKeyState(VK_LEFT) & 0x8000)  MoveCameraX( -1.f );
+			if (GetAsyncKeyState(VK_RIGHT) & 0x8000) MoveCameraX( 1.f );
+			if (GetAsyncKeyState(VK_UP) & 0x8000)    MoveCameraY( 1.f );
+			if (GetAsyncKeyState(VK_DOWN) & 0x8000)  MoveCameraY( -1.f );
 
 
 			Update();

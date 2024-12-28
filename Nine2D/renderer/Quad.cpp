@@ -33,6 +33,7 @@ void RenderableToVertex(VERTEX* vt, Dx2DRenderable* rd)
 
 
 
+void GetActorAnimVertexUV(Dx2DRenderable2* rd, VERTEX* Vt);
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -83,7 +84,7 @@ Quad::~Quad()
 
 }
 
-void CalcVERTEX(Dx2DRenderable* rd, VERTEX* vt)
+void CalcVERTEX(Dx2DRenderable2* rd, VERTEX* vt)
 {
 	float lx = rd->position.x - (rd->w * rd->ancherX);
 	float ty = rd->position.y + (rd->h * rd->ancherY);
@@ -101,7 +102,7 @@ void CalcVERTEX(Dx2DRenderable* rd, VERTEX* vt)
 	vt[3].X = frx;	vt[3].Y = fty; vt[3].Z = 0.f;
 }
 
-void Quad::Update(Dx2DRenderable* rd)
+void Quad::Update(Dx2DRenderable2* rd)
 {
     VERTEX OurVertices[4] {
 		{-0.5f, -0.5f, 0.0f, 0.f, 1.f},
@@ -111,9 +112,9 @@ void Quad::Update(Dx2DRenderable* rd)
 	};
 
 	if(rd->tex.mName != TOWNHALL_FILE_NAME )
-		DxTextureMgr::get()->GetUV2( (Dx2DRenderable2*)rd, OurVertices);
-
-	CalcVERTEX(rd, OurVertices);
+		GetActorAnimVertexUV(rd, OurVertices);
+	else
+		CalcVERTEX(rd, OurVertices);
 
 	// g_Dx11.context->UpdateSubresource( mVertexBuffer, 0, nullptr, OurVertices, 0, 0 );
 
@@ -124,18 +125,7 @@ void Quad::Update(Dx2DRenderable* rd)
 	
 }
 
-
-void Quad::Draw(Dx2DRenderable* sp)
-{
-	g_Dx11.context->IASetInputLayout(mVertexLayout);
-
-	UINT stride = sizeof(VERTEX);
-	UINT offset = 0;
-	g_Dx11.context->IASetVertexBuffers(0, 1, &mVertexBuffer, &stride, &offset);
-	g_Dx11.context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-}
-
-void Quad::Apply(Dx2DRenderable* sp)
+void Quad::Apply(Dx2DRenderable2* sp)
 {
 	Update(sp);
 

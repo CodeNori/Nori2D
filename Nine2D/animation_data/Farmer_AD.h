@@ -45,6 +45,14 @@ UltraRect Farmer_right[] = {
 	Farmer_Rect(224.f, 64.f)
 };
 
+UltraAnchor Farmer_A_up[] = {
+	{-16.f,22.f, -8.f,20.f,6.f,0.f},
+	{-16.f,22.f, -8.f,20.f,6.f,0.f},
+	{-16.f,22.f, -8.f,20.f,6.f,0.f},
+	{-16.f,22.f, -8.f,20.f,6.f,0.f},
+	{-16.f,22.f, -8.f,20.f,6.f,0.f},
+	{-16.f,22.f, -8.f,20.f,6.f,0.f}
+};
 
 
 AnimRectTime Farmer_Time = { Farmer_FrameAnimationTime, ARRAYSIZE(Farmer_up) };

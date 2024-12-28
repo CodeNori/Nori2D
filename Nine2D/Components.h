@@ -1,14 +1,6 @@
 #pragma once
 #include "base/Vec2.h"
 
-#ifndef SAFE_RELEASE
-#define SAFE_RELEASE(_ptr) { if(_ptr){_ptr->Release();} _ptr = nullptr; }
-#endif
-
-#ifndef SAFE_DELETE
-#define SAFE_DELETE(_ptr) { if(_ptr){ delete (_ptr);} _ptr = nullptr; }
-#endif
-
 
 struct TimeData
 {
@@ -51,25 +43,7 @@ struct Dx11Vars
 };
 
 
-struct CameraComponents
-{
-	// Camera matrices
-	DirectX::XMFLOAT4X4 viewMatrix;
-	DirectX::XMFLOAT4X4 projMatrix;
-
-	// Transformations
-	DirectX::XMFLOAT3 startPosition;
-	DirectX::XMFLOAT3 position;
-	DirectX::XMFLOAT4 rotation;
-	float xRotation;
-	float yRotation;
-};
-
-
-struct Vec2_t
-{
-    float x, y;
-};
+//-----------------------------------------------
 
 struct Pos_t
 {
@@ -115,13 +89,36 @@ struct CollisionEvent
 	ecs_id_t l, r;
 };
 
+
+
+//-----------------------------------------------
+
 extern Dx11Vars g_Dx11;
 extern TimeData g_Time;
-extern ax::Vec2 g_CameraPos;
 extern ecs_t* ecs1;
 
+// component IDs
+extern ecs_id_t PositionCompID;
+extern ecs_id_t VelocityCompID;
+extern ecs_id_t TextureCompID;
+extern ecs_id_t HouseCompID;
+extern ecs_id_t UnitCompID;
+extern ecs_id_t RectCompID;
+extern ecs_id_t AnchorCompID;
+
+// System IDs
+extern ecs_id_t MovementSysID;
+extern ecs_id_t RenderSysID_House;
+extern ecs_id_t RenderSysID_Unit;
+
+//-----------------------------------------------
+
+
+
+#include "Camera.h"
 #include "Components_inline.h"
 #include "Components_tower.h"
+
 
 
 void register_components();
@@ -130,4 +127,9 @@ void Update_system_all(float dt);
 void Render_system_all(float dt);
 void create_entity_Unit();
 void create_entity_House();
+
+
+
+
+
 

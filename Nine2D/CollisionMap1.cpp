@@ -122,7 +122,7 @@ void CollisionMap1::Insert2(CollisionRect* rc)
     }
 }
 
-void Set_CollisionFlag(ecs_id_t id1, ecs_id_t id2);
+void Push_CollisionFlag(ecs_id_t id1, ecs_id_t id2);
 
 void CollisionMap1::Collide() 
 {
@@ -132,7 +132,7 @@ void CollisionMap1::Collide()
                 if (left.id == right.id) continue;
                 if (isOverlapped(left, right)) {
                     //events.push_back({ left.id, right.id });
-                    Set_CollisionFlag(left.id, right.id);
+                    Push_CollisionFlag(left.id, right.id);
                 }
             }
         }

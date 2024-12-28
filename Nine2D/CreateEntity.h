@@ -15,7 +15,6 @@ void create_entity_Unit()
     CollisionRect*  rc = (CollisionRect*)ecs_add(ecs1, id, RectCompID, NULL);
 
     *type  = 0;
-
     
     float x = (float)(rand() % g_Dx11.width);
     float y = (float)(rand() % g_Dx11.height);

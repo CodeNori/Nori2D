@@ -13,8 +13,8 @@
 #include <sstream>
 #include <fstream>
 
-#include "base\Vec2.h"
 #include "base\MyUtils.h"
+#include "base\Vec2.h"
 #include "preDefines.h"
 
 typedef DirectX::XMFLOAT2 XFloat2;

@@ -6,6 +6,7 @@
 
 #include "DxImGui.h"
 
+extern Dx2DRenderer* g_ECS_Renderer;
 
 
 
@@ -24,11 +25,14 @@ DemoGame1::~DemoGame1()
 
 }
 
-extern Dx2DRenderer* g_ECS_Renderer;
 
 void DemoGame1::Draw(void* param)
 {
-	g_ECS_Renderer = mRD;
+    if(isTexturedDraw) 
+        g_ECS_Renderer->SetTexturedPS();
+    else 
+        g_ECS_Renderer->SetColoredPS();
+
 	Render_system_all(g_Time.deltaTime);
 }
 
@@ -43,6 +47,8 @@ void DemoGame1::DrawGui(void* param)
 
     if (ImGui::CollapsingHeader("Actor"))
     {
+        ImGui::Checkbox("Texture Draw", &isTexturedDraw);
+
         ImGui::SeparatorText("ABOUT THIS DEMO:");
         ImGui::BulletText("Sections below are demonstrating many aspects of the library.");
         ImGui::BulletText("The \"Examples\" menu above leads to more demo contents.");
@@ -85,6 +91,7 @@ void DemoGame1::sample()
 
 void DemoGame1::getMouse(int x, int y)
 {
+
 }
 
 

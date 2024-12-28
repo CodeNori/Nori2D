@@ -1,4 +1,7 @@
 
+Dx2DRenderer* g_ECS_Renderer = nullptr;
+
+
 ecs_ret_t Render_System_House(ecs_t* ecs,
                           ecs_id_t* entities,
                           int entity_count,
@@ -82,7 +85,7 @@ ecs_ret_t Render_System_Unit(ecs_t* ecs,
     rd.ancherY = 0.5f;
     rd.h = 128;
     rd.w = 128;
-    rd.tex.mName = ULTRA_FILE_NAME;
+    rd.tex.mName = FARMER_FILE_NAME;
     rd.tex.mTextureRV = nullptr;
 
     (void)udata;
@@ -117,7 +120,7 @@ ecs_ret_t Render_System_Unit(ecs_t* ecs,
         if(*type >= 250)
             rd.color = {1.f, 0.f, 0.f, 1.f};
         else
-            rd.color = {0.2f, 0.2f, 0.2f, 1.f};
+            rd.color = {1.0f, 1.0f, 1.0f, 1.f};
 
         rd.vel = vel->dir;
 

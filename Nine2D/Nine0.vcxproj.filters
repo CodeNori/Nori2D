@@ -5,12 +5,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="tk">
-      <UniqueIdentifier>{63bd5f89-b9c0-4c4f-aca9-7ffa96f468df}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="shader file">
-      <UniqueIdentifier>{b56ff540-3143-49d7-abcf-b0c66c0095d8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="WinMain">
       <UniqueIdentifier>{26f82463-50a7-41c6-93c4-47332c7b3485}</UniqueIdentifier>
     </Filter>
@@ -20,43 +14,58 @@
     <Filter Include="base">
       <UniqueIdentifier>{81d9d94e-2be9-4c30-8549-d0e1d4b836de}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Renderer">
-      <UniqueIdentifier>{498b5da0-a993-4ba2-9989-7fb139bb831b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ECS">
-      <UniqueIdentifier>{023661de-46d5-4ed8-ba95-14261cb59f02}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ECS\Animation">
-      <UniqueIdentifier>{a4e4279a-456e-4d21-acdc-eefefcf8ff3c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Tower">
       <UniqueIdentifier>{16a183e0-aea2-4adf-8341-412addab62a7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="imGui">
+    <Filter Include="Camera">
+      <UniqueIdentifier>{3a7d6a06-9906-467d-8970-d35ec325ceca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{f3ec9c92-9229-42e8-83db-43f633ac3199}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{47f3c65b-2a87-46f0-9ef8-b2087187c27a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{a4e4279a-456e-4d21-acdc-eefefcf8ff3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World">
+      <UniqueIdentifier>{023661de-46d5-4ed8-ba95-14261cb59f02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render">
+      <UniqueIdentifier>{498b5da0-a993-4ba2-9989-7fb139bb831b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\tk">
+      <UniqueIdentifier>{63bd5f89-b9c0-4c4f-aca9-7ffa96f468df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\shader file">
+      <UniqueIdentifier>{b56ff540-3143-49d7-abcf-b0c66c0095d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\imGui">
       <UniqueIdentifier>{0754eabe-2832-4b8f-b0ad-dcf6efb4f707}</UniqueIdentifier>
     </Filter>
-    <Filter Include="imGui\lib">
+    <Filter Include="Render\imGui\lib">
       <UniqueIdentifier>{6a16adf7-842d-481f-aa49-d14deeb440d9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tk\DDS.h">
-      <Filter>tk</Filter>
+      <Filter>Render\tk</Filter>
     </ClInclude>
     <ClInclude Include="tk\DDSTextureLoader.h">
-      <Filter>tk</Filter>
+      <Filter>Render\tk</Filter>
     </ClInclude>
     <ClInclude Include="tk\DirectXHelpers.h">
-      <Filter>tk</Filter>
+      <Filter>Render\tk</Filter>
     </ClInclude>
     <ClInclude Include="tk\LoaderHelpers.h">
-      <Filter>tk</Filter>
+      <Filter>Render\tk</Filter>
     </ClInclude>
     <ClInclude Include="tk\PlatformHelpers.h">
-      <Filter>tk</Filter>
+      <Filter>Render\tk</Filter>
     </ClInclude>
     <ClInclude Include="tk\WICTextureLoader.h">
-      <Filter>tk</Filter>
+      <Filter>Render\tk</Filter>
     </ClInclude>
     <ClInclude Include="framework.h">
       <Filter>WinMain</Filter>
@@ -86,59 +95,41 @@
       <Filter>base</Filter>
     </ClInclude>
     <ClInclude Include="renderer\ConstantBuffer.h">
-      <Filter>Renderer</Filter>
+      <Filter>Render</Filter>
     </ClInclude>
     <ClInclude Include="renderer\Dx2DRenderable.h">
-      <Filter>Renderer</Filter>
+      <Filter>Render</Filter>
     </ClInclude>
     <ClInclude Include="renderer\Dx2DRenderer.h">
-      <Filter>Renderer</Filter>
+      <Filter>Render</Filter>
     </ClInclude>
     <ClInclude Include="renderer\DxShader.h">
-      <Filter>Renderer</Filter>
+      <Filter>Render</Filter>
     </ClInclude>
     <ClInclude Include="renderer\DxTexture.h">
-      <Filter>Renderer</Filter>
+      <Filter>Render</Filter>
     </ClInclude>
     <ClInclude Include="renderer\DxWindow.h">
-      <Filter>Renderer</Filter>
+      <Filter>Render</Filter>
     </ClInclude>
     <ClInclude Include="renderer\Quad.h">
-      <Filter>Renderer</Filter>
+      <Filter>Render</Filter>
     </ClInclude>
     <ClInclude Include="preDefines.h" />
-    <ClInclude Include="Components.h">
-      <Filter>ECS</Filter>
-    </ClInclude>
     <ClInclude Include="DemoGame1.h">
-      <Filter>ECS</Filter>
+      <Filter>World</Filter>
     </ClInclude>
     <ClInclude Include="Actor1.h">
-      <Filter>ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionMap1.h">
-      <Filter>ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="Components_inline.h">
-      <Filter>ECS</Filter>
+      <Filter>World</Filter>
     </ClInclude>
     <ClInclude Include="base\MyUtils.h">
       <Filter>base</Filter>
     </ClInclude>
-    <ClInclude Include="CreateEntity.h">
-      <Filter>ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="Sys_Movement.h">
-      <Filter>ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="Sys_Render.h">
-      <Filter>ECS</Filter>
-    </ClInclude>
     <ClInclude Include="AnimationData.h">
-      <Filter>ECS\Animation</Filter>
+      <Filter>Animation</Filter>
     </ClInclude>
     <ClInclude Include="animation_data\Ultra_AD.h">
-      <Filter>ECS\Animation</Filter>
+      <Filter>Animation</Filter>
     </ClInclude>
     <ClInclude Include="Components_tower.h">
       <Filter>Tower</Filter>
@@ -147,33 +138,54 @@
       <Filter>Tower</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imconfig.h">
-      <Filter>imGui\lib</Filter>
+      <Filter>Render\imGui\lib</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imgui.h">
-      <Filter>imGui\lib</Filter>
+      <Filter>Render\imGui\lib</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imgui_impl_dx11.h">
-      <Filter>imGui\lib</Filter>
+      <Filter>Render\imGui\lib</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imgui_impl_win32.h">
-      <Filter>imGui\lib</Filter>
+      <Filter>Render\imGui\lib</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imgui_internal.h">
-      <Filter>imGui\lib</Filter>
+      <Filter>Render\imGui\lib</Filter>
     </ClInclude>
     <ClInclude Include="DxImGui.h">
-      <Filter>imGui</Filter>
+      <Filter>Render\imGui</Filter>
     </ClInclude>
     <ClInclude Include="animation_data\Farmer_AD.h">
-      <Filter>ECS\Animation</Filter>
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Sys_Render.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sys_Movement.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Components.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Components_inline.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateEntity.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionMap1.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tk\DDSTextureLoader.cpp">
-      <Filter>tk</Filter>
+      <Filter>Render\tk</Filter>
     </ClCompile>
     <ClCompile Include="tk\WICTextureLoader.cpp">
-      <Filter>tk</Filter>
+      <Filter>Render\tk</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>WinMain</Filter>
@@ -185,58 +197,64 @@
       <Filter>base</Filter>
     </ClCompile>
     <ClCompile Include="renderer\Dx2DRenderer.cpp">
-      <Filter>Renderer</Filter>
+      <Filter>Render</Filter>
     </ClCompile>
     <ClCompile Include="renderer\DxShader.cpp">
-      <Filter>Renderer</Filter>
+      <Filter>Render</Filter>
     </ClCompile>
     <ClCompile Include="renderer\DxTexture.cpp">
-      <Filter>Renderer</Filter>
+      <Filter>Render</Filter>
     </ClCompile>
     <ClCompile Include="renderer\DxWindow.cpp">
-      <Filter>Renderer</Filter>
+      <Filter>Render</Filter>
     </ClCompile>
     <ClCompile Include="renderer\Quad.cpp">
-      <Filter>Renderer</Filter>
+      <Filter>Render</Filter>
     </ClCompile>
     <ClCompile Include="DemoGame1.cpp">
-      <Filter>ECS</Filter>
-    </ClCompile>
-    <ClCompile Include="Components_System.cpp">
-      <Filter>ECS</Filter>
+      <Filter>World</Filter>
     </ClCompile>
     <ClCompile Include="Actor1.cpp">
-      <Filter>ECS</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionMap1.cpp">
-      <Filter>ECS</Filter>
+      <Filter>World</Filter>
     </ClCompile>
     <ClCompile Include="base\MyUtils.cpp">
       <Filter>base</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui.cpp">
-      <Filter>imGui\lib</Filter>
+      <Filter>Render\imGui\lib</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui_demo.cpp">
-      <Filter>imGui\lib</Filter>
+      <Filter>Render\imGui\lib</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui_draw.cpp">
-      <Filter>imGui\lib</Filter>
+      <Filter>Render\imGui\lib</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui_impl_dx11.cpp">
-      <Filter>imGui\lib</Filter>
+      <Filter>Render\imGui\lib</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui_impl_win32.cpp">
-      <Filter>imGui\lib</Filter>
+      <Filter>Render\imGui\lib</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui_tables.cpp">
-      <Filter>imGui\lib</Filter>
+      <Filter>Render\imGui\lib</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui_widgets.cpp">
-      <Filter>imGui\lib</Filter>
+      <Filter>Render\imGui\lib</Filter>
     </ClCompile>
     <ClCompile Include="DxImGui.cpp">
-      <Filter>imGui</Filter>
+      <Filter>Render\imGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ECSystem.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Components.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionMap1.cpp">
+      <Filter>System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -254,18 +272,18 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="PS.hlsl">
-      <Filter>shader file</Filter>
+      <Filter>Render\shader file</Filter>
     </FxCompile>
     <FxCompile Include="VS.hlsl">
-      <Filter>shader file</Filter>
+      <Filter>Render\shader file</Filter>
     </FxCompile>
     <FxCompile Include="PS_color.hlsl">
-      <Filter>shader file</Filter>
+      <Filter>Render\shader file</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="tk\SimpleMath.inl">
-      <Filter>tk</Filter>
+      <Filter>Render\tk</Filter>
     </None>
   </ItemGroup>
 </Project>
