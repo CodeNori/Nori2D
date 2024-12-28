@@ -78,17 +78,18 @@ ecs_ret_t Movement_System(ecs_t* ecs,
         //
         //  Rectangle °è»ê.....
         //
-        rect->left = pos->x - (anchor->w * anchor->anchorX);
-        rect->top = pos->y + (anchor->h * anchor->anchorY);
-        rect->right = rect->left + anchor->w;
-        rect->bottom = rect->top - anchor->h;
-        rect->id = id;
+        CollisionRect rc1;
+        rc1.left = pos->x + rect->left;
+        rc1.right = pos->x + rect->right;
+        rc1.top = pos->y + rect->top;
+        rc1.bottom = pos->y + rect->bottom;
+        rc1.id = id;
 
         //
         //  Physics ....
         //
         if (col_Map1.isEnabled) {
-            col_Map1.Insert2(rect);
+            col_Map1.Insert2(&rc1);
             *type = 0;
         }
 

@@ -44,7 +44,7 @@ public:
 
 	Dx2DRenderer() { g=this; create(); }
 	~Dx2DRenderer();
-	void Draw2(Dx2DRenderable2* sprite, CollisionRect* rc) override;
+	void Draw2(Dx2DRenderable2* sprite) override;
 	bool isMeshColor(XFloat4& c) { 
 		return mMeshColor.x == c.x && 
 				mMeshColor.y == c.y && 

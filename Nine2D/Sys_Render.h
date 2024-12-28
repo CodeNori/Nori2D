@@ -47,7 +47,7 @@ ecs_ret_t Render_System_House(ecs_t* ecs,
         rd.AnimTime = img->AnimTime;
         rd.frameNo = 0;
         
-        g_ECS_Renderer->Draw2(&rd, rect);
+        g_ECS_Renderer->Draw2(&rd);
 
         img->tex = rd.tex.mTextureRV;   // 历厘..
         img->AnimTime = rd.AnimTime;    // 历厘..
@@ -123,9 +123,9 @@ ecs_ret_t Render_System_Unit(ecs_t* ecs,
             rd.color = {1.0f, 1.0f, 1.0f, 1.f};
 
         rd.vel = vel->dir;
+        rd.colRect = rect;
 
-
-        g_ECS_Renderer->Draw2(&rd, rect);
+        g_ECS_Renderer->Draw2(&rd);
 
         // 历厘
         // 历厘

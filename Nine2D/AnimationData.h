@@ -64,7 +64,12 @@ void GetActorVertexUV(Dx2DRenderable2* rd, VERTEX* vt)
 		vt[1] = { rd->position.x+anchor.a_x, rd->position.y+anchor.a_y, 0.f, uv.U1, uv.V1  };
 		vt[0] = { vt[1].X,                   vt[1].Y-Farmer_FrameSizeF, 0.f, uv.U1, uv.V2  };
 		vt[2] = { vt[1].X+Farmer_FrameSizeF, vt[1].Y-Farmer_FrameSizeF, 0.f, uv.U2, uv.V2  };
-		vt[3] = { vt[1].X+Farmer_FrameSizeF,                   vt[1].Y, 0.f, uv.U2, uv.V1  };		
+		vt[3] = { vt[1].X+Farmer_FrameSizeF,                   vt[1].Y, 0.f, uv.U2, uv.V1  };
+
+		rd->colRect->left = anchor.physics_x1;
+		rd->colRect->right = anchor.physics_x2;
+		rd->colRect->top = anchor.physics_y1;
+		rd->colRect->bottom = anchor.physics_y2;
 	}
 
 	vt[0].X = (vt[0].X - g_CameraPos.x) / g_Dx11.half_width;

@@ -117,7 +117,7 @@ Dx2DRenderer::~Dx2DRenderer()
 
 
 
-void Dx2DRenderer::Draw2(Dx2DRenderable2* sp, CollisionRect* rc)
+void Dx2DRenderer::Draw2(Dx2DRenderable2* sp)
 {
 	if (sp->tex.isNull()) {
 		sp->tex.mTextureRV = DxTextureMgr::get()->Find(sp->tex.mName);
