@@ -122,17 +122,21 @@ void CollisionMap1::Insert2(CollisionRect* rc)
     }
 }
 
-void Push_CollisionFlag(ecs_id_t id1, ecs_id_t id2);
+void Process_Overlapped(ecs_id_t id1, ecs_id_t id2);
+
 
 void CollisionMap1::Collide() 
 {
+    collisionCount = 0;
+
     for (const std::vector<CollisionRect>& candidates : grid) {
         for (const CollisionRect& left : candidates) {
             for (const CollisionRect& right : candidates) {
                 if (left.id == right.id) continue;
                 if (isOverlapped(left, right)) {
                     //events.push_back({ left.id, right.id });
-                    Push_CollisionFlag(left.id, right.id);
+                    Process_Overlapped(left.id, right.id);
+                    ++collisionCount;
                 }
             }
         }

@@ -1,15 +1,4 @@
 
-CollisionMap1 col_Map1;
-
-
-
-void Push_CollisionFlag(ecs_id_t id1, ecs_id_t id2)
-{
-        BYTE* type1 = (BYTE*)ecs_get(ecs1, id1, UnitCompID);
-        BYTE* type2 = (BYTE*)ecs_get(ecs1, id2, UnitCompID);
-        *type1 = 255;
-        *type2 = 255;
-}
 
 
 Vec2 GetRandomDir()
@@ -63,11 +52,12 @@ ecs_ret_t Movement_System(ecs_t* ecs,
         // Get entity ID
         ecs_id_t id = entities[i];
 
-        Pos_t* pos = (Pos_t*)ecs_get(ecs, id, PositionCompID);
-        Velocity_t* vel = (Velocity_t*)ecs_get(ecs, id, VelocityCompID);
-        Anchor_t* anchor = (Anchor_t*)ecs_get(ecs, id, AnchorCompID);
+                 Pos_t* pos =         (Pos_t*)ecs_get(ecs, id, PositionCompID);
+            Velocity_t* vel =    (Velocity_t*)ecs_get(ecs, id, VelocityCompID);
+           Anchor_t* anchor =      (Anchor_t*)ecs_get(ecs, id, AnchorCompID);
         CollisionRect* rect = (CollisionRect*)ecs_get(ecs, id, RectCompID);
-        BYTE* type = (BYTE*)ecs_get(ecs, id, UnitCompID);
+         UnitState_t* flags =   (UnitState_t*)ecs_get(ecs, id, UnitCompID);
+        CollisionEvent1* ev = (CollisionEvent1*)ecs_get(ecs, id, CollisionEvent1CompID);
 
         //
         //  위치 이동.....
@@ -76,24 +66,13 @@ ecs_ret_t Movement_System(ecs_t* ecs,
         pos->y += (vel->dir.y * vel->speed) * dt;
 
         //
-        //  Rectangle 계산.....
+        //  Collision 계산.....
         //
-        CollisionRect rc1;
-        rc1.left = pos->x + rect->left;
-        rc1.right = pos->x + rect->right;
-        rc1.top = pos->y + rect->top;
-        rc1.bottom = pos->y + rect->bottom;
-        rc1.id = id;
+        Start_Collision(id, pos, rect, flags, ev);
 
         //
-        //  Physics ....
+        //  
         //
-        if (col_Map1.isEnabled) {
-            col_Map1.Insert2(&rc1);
-            *type = 0;
-        }
-
-
         영역밖이면_안쪽으로_속도변경(pos, vel);
     }
 
@@ -101,21 +80,7 @@ ecs_ret_t Movement_System(ecs_t* ecs,
     //
     //  Physics ....
     //
-    if(col_Map1.isEnabled) {
-        col_Map1.Collide();
-        
-        /*
-        for(int i=0; i<col_Map1.events.size(); ++i) {
-            CollisionEvent& e = col_Map1.events[i];
-            BYTE* type = (BYTE*)ecs_get(ecs1, e.l, UnitCompID);
-            *type = 255;
-            type = (BYTE*)ecs_get(ecs1, e.r, UnitCompID);
-            *type = 255;
-
-            
-        }
-        */
-    }
+    End_Collision_CheckAll();
 
     return 0;
 }

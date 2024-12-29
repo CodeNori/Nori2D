@@ -8,8 +8,7 @@ struct Color4
 
 
 
-class Actor1
+struct Actor1
 {
-public:
-
+    ecs_id_t id;
 };

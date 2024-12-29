@@ -1,21 +1,26 @@
 
 
 
-void create_entity_Unit()
+ecs_id_t create_entity_Unit()
 {
     // Create entity
     ecs_id_t id = ecs_create(ecs1);
 
     // Add components
-    Pos_t* pos = (Pos_t*)ecs_add(ecs1, id, PositionCompID, NULL);
-    Velocity_t*  dir = (Velocity_t*)ecs_add(ecs1, id, VelocityCompID, NULL);
-    Img_t*  img = (Img_t*)ecs_add(ecs1, id, TextureCompID, NULL);
-    BYTE* type = (BYTE*)ecs_add(ecs1, id, UnitCompID, NULL);
-    Anchor_t* anchor = (Anchor_t*)ecs_add(ecs1, id, AnchorCompID, NULL);
-    CollisionRect*  rc = (CollisionRect*)ecs_add(ecs1, id, RectCompID, NULL);
+            Pos_t* pos =         (Pos_t*)ecs_add(ecs1, id, PositionCompID, NULL);
+      Velocity_t*  dir =    (Velocity_t*)ecs_add(ecs1, id, VelocityCompID, NULL);
+           Img_t*  img =         (Img_t*)ecs_add(ecs1, id, TextureCompID, NULL);
+    UnitState_t* flags =   (UnitState_t*)ecs_add(ecs1, id, UnitCompID, NULL);
+      Anchor_t* anchor =      (Anchor_t*)ecs_add(ecs1, id, AnchorCompID, NULL);
+    CollisionRect*  rc =  (CollisionRect*)ecs_add(ecs1, id, RectCompID, NULL);
+    CollisionEvent1*ce = (CollisionEvent1*)ecs_add(ecs1, id, CollisionEvent1CompID, NULL);
 
-    *type  = 0;
+    flags->isCollision = 0;
+    flags->isDead = 0;
     
+    ce->l = id;
+    ce->r = id;
+
     float x = (float)(rand() % g_Dx11.width);
     float y = (float)(rand() % g_Dx11.height);
     Vec2 p = ScreenToWorld({x,y});
@@ -35,21 +40,25 @@ void create_entity_Unit()
 	img->frameNo = 0;
 	img->AnimTime = 0;
     img->dir = 0;
+
+    return id;
 }
 
-void create_entity_House()
+
+ecs_id_t create_entity_House()
 {
     // Create entity
     ecs_id_t id = ecs_create(ecs1);
 
     // Add components
-    Pos_t* pos = (Pos_t*)ecs_add(ecs1, id, PositionCompID, NULL);
-    Img_t*  img = (Img_t*)ecs_add(ecs1, id, TextureCompID, NULL);
-    char*  type = (char*)ecs_add(ecs1, id, HouseCompID, NULL);
-    Anchor_t* anchor = (Anchor_t*)ecs_add(ecs1, id, AnchorCompID, NULL);
+           Pos_t* pos = (Pos_t*)ecs_add(ecs1, id, PositionCompID, NULL);
+          Img_t*  img = (Img_t*)ecs_add(ecs1, id, TextureCompID, NULL);
+   UnitState_t* flags = (UnitState_t*)ecs_add(ecs1, id, HouseCompID, NULL);
+     Anchor_t* anchor = (Anchor_t*)ecs_add(ecs1, id, AnchorCompID, NULL);
     CollisionRect* rc = (CollisionRect*)ecs_add(ecs1, id, RectCompID, NULL);
 
-    *type = 1;
+    flags->isCollision = 0;
+    flags->isDead = 0;
 
     pos->x = (float)( rand() % g_Dx11.width );
     pos->y = (float)( rand() % g_Dx11.height );
@@ -65,6 +74,8 @@ void create_entity_House()
 	img->frameNo = 0;
 	img->AnimTime = 0;
     img->dir = 0;
+
+    return id;
 
 }
 

@@ -60,19 +60,6 @@ ecs_ret_t Render_System_House(ecs_t* ecs,
 }
 
 
-void Toggle_PShader(ecs_dt_t dt)
-{
-    if(DxWindow::g->isSpaceKey_coolTime > 0.f)
-        DxWindow::g->isSpaceKey_coolTime -= dt;
-
-    if(DxWindow::g->isSpaceKey) {
-        if(DxWindow::g->isSpaceKey_coolTime <= 0.f ) {
-            g_ECS_Renderer->TogglePS();
-            DxWindow::g->isSpaceKey_coolTime = 0.5f;
-        }
-    }
-}
-
 ecs_ret_t Render_System_Unit(ecs_t* ecs,
                           ecs_id_t* entities,
                           int entity_count,
@@ -90,7 +77,7 @@ ecs_ret_t Render_System_Unit(ecs_t* ecs,
 
     (void)udata;
     //printf("Render_System = %d \n", entity_count);
-    Toggle_PShader(dt);
+
 
     for (int i = 0; i < entity_count; i++)
     {
@@ -100,7 +87,7 @@ ecs_ret_t Render_System_Unit(ecs_t* ecs,
         Pos_t* pos = (Pos_t*)ecs_get(ecs, id, PositionCompID);
         Img_t* img = (Img_t*)ecs_get(ecs, id, TextureCompID);
         CollisionRect* rect = (CollisionRect*)ecs_get(ecs, id, RectCompID);
-        BYTE* type = (BYTE*)ecs_get(ecs, id, UnitCompID);
+        UnitState_t* flags = (UnitState_t*)ecs_get(ecs, id, UnitCompID);
         Velocity_t* vel = (Velocity_t*)ecs_get(ecs, id, VelocityCompID);
 
         rd.position.x = pos->x;
@@ -117,7 +104,7 @@ ecs_ret_t Render_System_Unit(ecs_t* ecs,
         rd.AnimTime = img->AnimTime;
         rd.frameNo = img->frameNo;
         
-        if(*type >= 250)
+        if(flags->isCollision)
             rd.color = {1.f, 0.f, 0.f, 1.f};
         else
             rd.color = {1.0f, 1.0f, 1.0f, 1.f};

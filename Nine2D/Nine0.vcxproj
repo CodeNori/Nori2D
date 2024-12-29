@@ -144,7 +144,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CollisionMap1.h" />
     <ClInclude Include="Components.h" />
-    <ClInclude Include="Components_inline.h" />
+    <ClInclude Include="Components_func.h" />
     <ClInclude Include="Components_tower.h" />
     <ClInclude Include="CreateEntity.h" />
     <ClInclude Include="DemoGame1.h" />
@@ -168,6 +168,7 @@
     <ClInclude Include="renderer\Quad.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="System_tower.h" />
+    <ClInclude Include="Sys_Collision.h" />
     <ClInclude Include="Sys_Movement.h" />
     <ClInclude Include="Sys_Render.h" />
     <ClInclude Include="targetver.h" />

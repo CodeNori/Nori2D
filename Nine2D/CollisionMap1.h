@@ -9,6 +9,7 @@ public:
     float start_x, start_y;
     int end_x, end_y;
 
+    int  collisionCount = 0;
     bool isEnabled = true;
 
     std::vector<std::vector<CollisionRect>> grid;

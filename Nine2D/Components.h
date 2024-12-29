@@ -29,7 +29,7 @@ struct Dx11Vars
 	HINSTANCE	hInstance;	
 	std::string titleBarText;
 	bool		titleBarStats;
-	HWND hWnd;
+	HWND		hWnd;
 
 	//D3D_FEATURE_LEVEL		dxFeatureLevel;
 	IDXGISwapChain* swapChain = 0;
@@ -89,7 +89,17 @@ struct CollisionEvent
 	ecs_id_t l, r;
 };
 
+struct CollisionEvent1
+{
+	ecs_id_t l, r;
+};
 
+struct UnitState_t
+{
+	BYTE  isDead : 1;
+	BYTE  isCollision : 1;
+	BYTE  rest : 6;
+};
 
 //-----------------------------------------------
 
@@ -105,6 +115,7 @@ extern ecs_id_t HouseCompID;
 extern ecs_id_t UnitCompID;
 extern ecs_id_t RectCompID;
 extern ecs_id_t AnchorCompID;
+extern ecs_id_t CollisionEvent1CompID;
 
 // System IDs
 extern ecs_id_t MovementSysID;
@@ -116,7 +127,7 @@ extern ecs_id_t RenderSysID_Unit;
 
 
 #include "Camera.h"
-#include "Components_inline.h"
+#include "Components_func.h"
 #include "Components_tower.h"
 
 
@@ -125,8 +136,9 @@ void register_components();
 void register_systems();
 void Update_system_all(float dt);
 void Render_system_all(float dt);
-void create_entity_Unit();
-void create_entity_House();
+
+ecs_id_t create_entity_Unit();
+ecs_id_t create_entity_House();
 
 
 

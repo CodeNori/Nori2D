@@ -167,17 +167,20 @@
     <ClInclude Include="Components.h">
       <Filter>Component</Filter>
     </ClInclude>
-    <ClInclude Include="Components_inline.h">
+    <ClInclude Include="Components_func.h">
       <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Camera</Filter>
     </ClInclude>
-    <ClInclude Include="CreateEntity.h">
-      <Filter>System</Filter>
-    </ClInclude>
     <ClInclude Include="CollisionMap1.h">
       <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sys_Collision.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateEntity.h">
+      <Filter>Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

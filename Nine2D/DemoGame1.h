@@ -4,7 +4,7 @@
 
 class DemoGame1
 {
-	std::vector<Actor1*>  mActorList;
+	std::vector<Actor1>  mActorList;
 	int count = 0;
 	bool isTexturedDraw = false;
 

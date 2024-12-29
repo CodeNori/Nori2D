@@ -19,6 +19,7 @@ ecs_id_t HouseCompID;
 ecs_id_t UnitCompID;
 ecs_id_t RectCompID;
 ecs_id_t AnchorCompID;
+ecs_id_t CollisionEvent1CompID;
 
 
 
@@ -33,7 +34,8 @@ void register_components()
     TextureCompID  = ecs_register_component(ecs1, sizeof(Img_t),  NULL, NULL);
     AnchorCompID = ecs_register_component(ecs1, sizeof(Anchor_t), NULL, NULL);
     RectCompID = ecs_register_component(ecs1, sizeof(CollisionRect), NULL, NULL);
-    HouseCompID  = ecs_register_component(ecs1, sizeof(char),  NULL, NULL);
-    UnitCompID = ecs_register_component(ecs1, sizeof(char), NULL, NULL);
+    HouseCompID  = ecs_register_component(ecs1, sizeof(UnitState_t),  NULL, NULL);
+    UnitCompID = ecs_register_component(ecs1, sizeof(UnitState_t), NULL, NULL);
+    CollisionEvent1CompID = ecs_register_component(ecs1, sizeof(CollisionEvent1), NULL, NULL);
 
 }

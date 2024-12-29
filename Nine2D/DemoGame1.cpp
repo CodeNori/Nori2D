@@ -77,8 +77,10 @@ void DemoGame1::Update(float delta)
 
 void DemoGame1::sample()
 {
-	for(int i=0; i<1000; ++i)
-		create_entity_Unit();
+	for(int i=0; i<1000; ++i) {
+		auto id = create_entity_Unit();
+        mActorList.push_back( {id} );
+    }
 
 	create_entity_House();
 	create_entity_House();

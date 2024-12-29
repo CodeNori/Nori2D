@@ -16,6 +16,7 @@ ecs_id_t RenderSysID_Unit;
 
 //------------------------------------------------------
 
+#include "Sys_Collision.h"
 #include "Sys_Movement.h"
 #include "Sys_Render.h"
 #include "CreateEntity.h"
@@ -23,8 +24,10 @@ ecs_id_t RenderSysID_Unit;
 
 
 
-int GetCollisionEventCount() {
-    return col_Map1.events.size();
+int GetCollisionEventCount() 
+{
+    return col_Map1.collisionCount;
+    // return col_Map1.events.size();
 
 }
 
@@ -38,6 +41,7 @@ void register_systems()
     ecs_require_component(ecs1, MovementSysID, AnchorCompID);
     ecs_require_component(ecs1, MovementSysID, RectCompID);
     ecs_require_component(ecs1, MovementSysID, UnitCompID);
+    ecs_require_component(ecs1, MovementSysID, CollisionEvent1CompID);
 
     RenderSysID_House = ecs_register_system(ecs1, Render_System_House, NULL, NULL, NULL);
     ecs_require_component(ecs1, RenderSysID_House, PositionCompID);
