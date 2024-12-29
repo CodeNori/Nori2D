@@ -10,8 +10,8 @@ void CollisionMap1::Setup(float sx, float sy, int w, int h)
     size_x = w / PARTITIONS + 1;
     size_y = h / PARTITIONS + 1;
 
-    end_x = size_x*PARTITIONS;
-    end_y = size_y*PARTITIONS;
+    end_x = (size_x*PARTITIONS);
+    end_y = (size_y*PARTITIONS);
 
     grid.clear();
     grid.resize(size_x * size_y);
@@ -43,72 +43,109 @@ void CollisionMap1::Clear_test()
     }
 }
 
-void CollisionMap1::Insert(CollisionRect* rc)
+int g_sl, g_sr, g_st, g_sb;
+int g_left, g_right, g_top, g_bottom;
+
+int CollisionMap1::FindSlot(CollisionRect* rc, int* slot)
 {
-    int sl = (int)(rc->left - start_x );
-    int sr = (int)(rc->right - start_x );
-    int st = (int)(rc->top - start_y );
-    int sb = (int)(rc->bottom - start_y );
+    float f_l = rc->left - start_x;
+    float f_r = rc->right - start_x;
+    float f_t = rc->top - start_y;
+    float f_b = rc->bottom - start_y;
 
-    int left = (sl/PARTITIONS);
-    int right = (sr/PARTITIONS);
-    int top = (st/PARTITIONS);
-    int bottom = (sb/PARTITIONS);
+    if(f_r < 0) return 0;
+    if(f_t < 0) return 0;
+    if(f_l > end_x) return 0;
+    if(f_b > end_y) return 0;
 
-    if (left < 0) left = 0;
-    if (right < 0) right = 0;
-    if (top < 0) top = 0;
-    if (bottom < 0) bottom = 0;
+    int sl = (int)f_l;
+    int sr = (int)f_r;
+    int st = (int)f_t;
+    int sb = (int)f_b;
 
-    if (left>=size_x) left = size_x-1;
-    if (right>=size_x) right = size_x-1;
-    if (top>=size_y) top = size_y-1;
-    if (bottom>=size_y) bottom = size_y-1;
+    //g_sl = sl;
+    //g_sr = sr;
+    //g_st = st;
+    //g_sb = sb;
 
+    int left = (sl/PARTITIONS);     if(left<0) left = 0;
+    int right = (sr/PARTITIONS);    if(right>=size_x) right = size_x-1;
+    int top = (st/PARTITIONS);      if(top>=size_y) top = size_y-1;
+    int bottom = (sb/PARTITIONS);   if(bottom<0) bottom = 0;
 
-    unsigned int slots[4] = {
-        left+top*size_x,
-        right+top*size_x,
-        left+bottom*size_x,
-        right+bottom*size_x,
+    //g_left = left;
+    //g_right = right;
+    //g_top = top;
+    //g_bottom = bottom;
+
+    int slots[4] = {
+        (bottom*size_x) + left,
+        (bottom*size_x) + right,
+        (top*size_x) + left,
+        (top*size_x) + right
     };
-    grid[slots[0]].push_back(*rc);
-    if (slots[0]!=slots[1]) grid[slots[1]].push_back(*rc);
-    if (slots[1]!=slots[2]) grid[slots[2]].push_back(*rc);
-    if (slots[2]!=slots[3]) grid[slots[3]].push_back(*rc);
+
+    //slot[0] = slots[0];
+    //slot[1] = slots[1];
+    //slot[2] = slots[2];
+    //slot[3] = slots[3];
+
+    int cnt = 0;
+    slot[cnt++] = slots[0];
+    if (slots[0]!=slots[1]) slot[cnt++] = slots[1];
+    if (slots[0]!=slots[2]) slot[cnt++] = slots[2];
+    if (slots[1]!=slots[3] && slots[2]!=slots[3]) slot[cnt++] = slots[3];
+
+    return cnt;
 }
 
+
+void CollisionMap1::Insert(CollisionRect* rc)
+{
+    int slot[4] = {-1,-1,-1,-1};
+    int slotCnt = FindSlot(rc, slot);
+    
+    for(int i=0; i<slotCnt; ++i) 
+        grid[slot[i]].push_back(*rc);
+
+}
 
 void CollisionMap1::Insert1(CollisionRect* rc)
 {
-    int sl = (int)(rc->left - start_x );
-    int sr = (int)(rc->right - start_x );
-    int st = (int)(rc->top - start_y );
-    int sb = (int)(rc->bottom - start_y );
+    int slot[4] = {-1,-1,-1,-1};
+    int slotCnt = FindSlot(rc, slot);
+    
+    // for(int i=0; i<slotCnt; ++i) 
+    //    grid[slot[i]].push_back(*rc);
+    
+    int count = 0;
+    int slot2[4] = {-1,-1,-1,-1};
 
-    if(sr <= 0) return;
-    if(sl >= end_x) return;
+    for(int i=0; i<grid.size(); ++i) {
+        if(isOverlapped(gridRect[i],*rc))
+        {
+            grid[i].push_back(*rc);
+                
+            // if(slot[0] != i &&
+            //   slot[1] != i &&
+            //   slot[2] != i &&
+            //   slot[3] != i)
+            //    OutputDebugString2("Collision grid가 다르다. (%d) %d, %d, %d, %d\n", i, slot[0],slot[1],slot[2],slot[3]);
+            slot2[count] = i;          
+            if(++count == 4) break;
+        }
+    }
+    
+    if(count != slotCnt)
+        { OutputDebugString2("Collision grid가 다르다. %d, %d, %d, %d\n", slot[0],slot[1],slot[2],slot[3]); }
+    else {
+    for(int i=0; i<count; ++i)
+        if(slot[i] != slot2[i])
+        { OutputDebugString2("Collision grid가 다르다. %d, %d, %d, %d\n", slot[0],slot[1],slot[2],slot[3]); }
+    }
 
-    if(st <= 0) return;
-    if(sb >= end_y) return;
-
-    int left = (sl/PARTITIONS);
-    int right = (sr/PARTITIONS);
-    int top = (st/PARTITIONS);
-    int bottom = (sb/PARTITIONS);
-
-
-    unsigned int slots[4] = {
-        top*size_x + left,
-        top*size_x + right,
-        bottom*size_x + left,
-        bottom*size_x + right,
-    };
-    grid[slots[0]].push_back(*rc);
-    if (slots[0]!=slots[1]) grid[slots[1]].push_back(*rc);
-    if (slots[0]!=slots[2]) grid[slots[2]].push_back(*rc);
-    if (slots[1]!=slots[3]) grid[slots[3]].push_back(*rc);
 }
+
 
 void CollisionMap1::Insert2(CollisionRect* rc)
 {

@@ -7,7 +7,7 @@ class CollisionMap1
 public:
     int size_x, size_y;
     float start_x, start_y;
-    int end_x, end_y;
+    float end_x, end_y;
 
     int  collisionCount = 0;
     bool isEnabled = true;
@@ -18,6 +18,7 @@ public:
 
     void Setup(float sx, float sy, int w, int h);
     void Clear_test();
+    int  FindSlot(CollisionRect* rc, int* slot);
     void Insert(CollisionRect* rc);
     void Insert1(CollisionRect* rc);
     void Insert2(CollisionRect* rc);

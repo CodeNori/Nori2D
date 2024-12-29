@@ -178,6 +178,7 @@
     <ClInclude Include="tk\LoaderHelpers.h" />
     <ClInclude Include="tk\PlatformHelpers.h" />
     <ClInclude Include="tk\WICTextureLoader.h" />
+    <ClInclude Include="UnitStateTypes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor1.cpp" />

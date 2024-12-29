@@ -12,3 +12,5 @@ struct Actor1
 {
     ecs_id_t id;
 };
+
+

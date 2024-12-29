@@ -101,6 +101,11 @@ struct UnitState_t
 	BYTE  rest : 6;
 };
 
+struct Team_t
+{
+	BYTE  teamNo;
+};
+
 //-----------------------------------------------
 
 extern Dx11Vars g_Dx11;

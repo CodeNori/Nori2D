@@ -182,6 +182,9 @@
     <ClInclude Include="CreateEntity.h">
       <Filter>Component</Filter>
     </ClInclude>
+    <ClInclude Include="UnitStateTypes.h">
+      <Filter>Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tk\DDSTextureLoader.cpp">
