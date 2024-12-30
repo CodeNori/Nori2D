@@ -20,12 +20,6 @@
     <Filter Include="Camera">
       <UniqueIdentifier>{3a7d6a06-9906-467d-8970-d35ec325ceca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Component">
-      <UniqueIdentifier>{f3ec9c92-9229-42e8-83db-43f633ac3199}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="System">
-      <UniqueIdentifier>{47f3c65b-2a87-46f0-9ef8-b2087187c27a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Animation">
       <UniqueIdentifier>{a4e4279a-456e-4d21-acdc-eefefcf8ff3c}</UniqueIdentifier>
     </Filter>
@@ -46,6 +40,12 @@
     </Filter>
     <Filter Include="Render\imGui\lib">
       <UniqueIdentifier>{6a16adf7-842d-481f-aa49-d14deeb440d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Component">
+      <UniqueIdentifier>{f3ec9c92-9229-42e8-83db-43f633ac3199}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. System">
+      <UniqueIdentifier>{47f3c65b-2a87-46f0-9ef8-b2087187c27a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -159,31 +159,34 @@
       <Filter>Animation</Filter>
     </ClInclude>
     <ClInclude Include="Sys_Render.h">
-      <Filter>System</Filter>
+      <Filter>2. System</Filter>
     </ClInclude>
     <ClInclude Include="Sys_Movement.h">
-      <Filter>System</Filter>
+      <Filter>2. System</Filter>
     </ClInclude>
     <ClInclude Include="Components.h">
-      <Filter>Component</Filter>
+      <Filter>1. Component</Filter>
     </ClInclude>
     <ClInclude Include="Components_func.h">
-      <Filter>Component</Filter>
+      <Filter>1. Component</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Camera</Filter>
     </ClInclude>
     <ClInclude Include="CollisionMap1.h">
-      <Filter>System</Filter>
+      <Filter>2. System</Filter>
     </ClInclude>
     <ClInclude Include="Sys_Collision.h">
-      <Filter>System</Filter>
+      <Filter>2. System</Filter>
     </ClInclude>
     <ClInclude Include="CreateEntity.h">
-      <Filter>Component</Filter>
+      <Filter>1. Component</Filter>
     </ClInclude>
     <ClInclude Include="UnitStateTypes.h">
-      <Filter>Component</Filter>
+      <Filter>1. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="animation_data\House_AD.h">
+      <Filter>Animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -251,16 +254,16 @@
       <Filter>Render\imGui</Filter>
     </ClCompile>
     <ClCompile Include="ECSystem.cpp">
-      <Filter>System</Filter>
+      <Filter>2. System</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
     <ClCompile Include="Components.cpp">
-      <Filter>Component</Filter>
+      <Filter>1. Component</Filter>
     </ClCompile>
     <ClCompile Include="CollisionMap1.cpp">
-      <Filter>System</Filter>
+      <Filter>2. System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

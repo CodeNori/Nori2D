@@ -46,6 +46,7 @@ ecs_ret_t Render_System_House(ecs_t* ecs,
         rd.dir = img->dir;
         rd.AnimTime = img->AnimTime;
         rd.frameNo = 0;
+        rd.colRect = rect;
         
         g_ECS_Renderer->Draw2(&rd);
 

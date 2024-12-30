@@ -124,8 +124,8 @@ extern ecs_id_t CollisionEvent1CompID;
 
 // System IDs
 extern ecs_id_t MovementSysID;
-extern ecs_id_t RenderSysID_House;
-extern ecs_id_t RenderSysID_Unit;
+extern ecs_id_t RenderHouse_SysID;
+extern ecs_id_t RenderUnit_SysID;
 
 //-----------------------------------------------
 

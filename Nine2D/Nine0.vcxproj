@@ -136,6 +136,7 @@
     <ClInclude Include="Actor1.h" />
     <ClInclude Include="AnimationData.h" />
     <ClInclude Include="animation_data\Farmer_AD.h" />
+    <ClInclude Include="animation_data\House_AD.h" />
     <ClInclude Include="animation_data\Ultra_AD.h" />
     <ClInclude Include="base\MathBase.h" />
     <ClInclude Include="base\MyUtils.h" />

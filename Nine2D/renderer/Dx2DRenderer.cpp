@@ -131,6 +131,8 @@ void Dx2DRenderer::Draw2(Dx2DRenderable2* sp)
 		mCB.SetData(cb);
 	}
 
+	mQuad->Update(sp);
+
 	mQuad->Apply(sp);
 	mVS->Apply();
 	mPS->Apply();

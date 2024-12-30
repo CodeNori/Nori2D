@@ -6,11 +6,13 @@ struct UltraRect
 	float U1, V1;
 	float U2, V2;
 };
+
 struct UltraAnchor
 {
-	float a_x, a_y;
-	float physics_x1, physics_y1;
-	float physics_x2, physics_y2;
+	float a_x, a_y;   // 이미지 안에서 중점 (Pixel)
+
+	float physics_x1, physics_y1;  // 중점을 기준으로 Left, Top 의 상대위치
+	float physics_x2, physics_y2;	// 중점을 기준으로 Right, Bottom 의 상대위치
 };
 
 
@@ -21,26 +23,13 @@ struct AnimRectTime
 	float totalFrame;
 };
 
-#include "animation_data/Ultra_AD.h"
-#include "animation_data/Farmer_AD.h"
-
 #define AX_DEGREES_TO_RADIANS(__ANGLE__) ((__ANGLE__) * 0.01745329252f)  // PI / 180
 
-UltraRect* Farmer_CalcAniDir(Vec2 mVelocity)
-{
-    float cos45 = cos(AX_DEGREES_TO_RADIANS(45));
+#include "animation_data/Ultra_AD.h"
+#include "animation_data/Farmer_AD.h"
+#include "animation_data/House_AD.h"
 
-    if (mVelocity.x > cos45)
-        return Farmer_right;
 
-    if (mVelocity.x < -cos45)
-        return Farmer_left;
-
-    if (mVelocity.y > 0)
-        return Farmer_up;
-
-    return Farmer_down;
-}
 
 
 void GetActorVertexUV(Dx2DRenderable2* rd, VERTEX* vt)

@@ -34,6 +34,8 @@ void RenderableToVertex(VERTEX* vt, Dx2DRenderable* rd)
 
 
 void GetActorAnimVertexUV(Dx2DRenderable2* rd, VERTEX* Vt);
+void GetActorAnimVertexUV_Farmer(Dx2DRenderable2* rd, VERTEX* Vt);
+void GetActorAnimVertexUV_House(Dx2DRenderable2* rd, VERTEX* Vt);
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -111,10 +113,9 @@ void Quad::Update(Dx2DRenderable2* rd)
 		{ 0.5f,  0.5f, 0.0f, 1.f, 0.f}	
 	};
 
-	if(rd->tex.mName != TOWNHALL_FILE_NAME )
-		GetActorAnimVertexUV(rd, OurVertices);
-	else
-		CalcVERTEX(rd, OurVertices);
+	if(rd->tex.mName == TOWNHALL_FILE_NAME ) GetActorAnimVertexUV_House(rd, OurVertices);
+	else if(rd->tex.mName == FARMER_FILE_NAME ) GetActorAnimVertexUV_Farmer(rd, OurVertices);
+	else if(rd->tex.mName == ULTRA_FILE_NAME ) GetActorAnimVertexUV(rd, OurVertices);
 
 	// g_Dx11.context->UpdateSubresource( mVertexBuffer, 0, nullptr, OurVertices, 0, 0 );
 
@@ -127,8 +128,6 @@ void Quad::Update(Dx2DRenderable2* rd)
 
 void Quad::Apply(Dx2DRenderable2* sp)
 {
-	Update(sp);
-
 	g_Dx11.context->IASetInputLayout(mVertexLayout);
 
 	UINT stride = sizeof(VERTEX);

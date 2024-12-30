@@ -62,8 +62,32 @@ ecs_ret_t Movement_System(ecs_t* ecs,
         //
         //  위치 이동.....
         //
-        pos->x += (vel->dir.x * vel->speed) * dt;
-        pos->y += (vel->dir.y * vel->speed) * dt;
+        if(flags->isCollision == 0 ) {
+            if(vel->speed == 0) vel->speed = 50.f;
+            pos->x += (vel->dir.x * vel->speed) * dt;
+            pos->y += (vel->dir.y * vel->speed) * dt;        
+        }
+        else {
+            if(vel->speed == 0) {
+                float speed = 50.f;
+                pos->x += (vel->dir.x * speed) * dt;
+                pos->y += (vel->dir.y * speed) * dt;  
+            }
+            else {
+                pos->x -= (vel->dir.x * vel->speed) * dt * 2.f;
+                pos->y -= (vel->dir.y * vel->speed) * dt * 2.f;   
+
+                vel->dir = GetRandomDir();
+                vel->speed = 0;
+            }
+            // flags->isCollision = 0;
+            // ev->l = id;
+            // ev->r = id;
+
+     
+
+        }
+        
 
         //
         //  Collision 계산.....

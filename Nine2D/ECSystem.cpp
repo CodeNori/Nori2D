@@ -9,8 +9,8 @@
 
 // System IDs
 ecs_id_t MovementSysID;
-ecs_id_t RenderSysID_House;
-ecs_id_t RenderSysID_Unit;
+ecs_id_t RenderHouse_SysID;
+ecs_id_t RenderUnit_SysID;
 
 
 
@@ -43,22 +43,22 @@ void register_systems()
     ecs_require_component(ecs1, MovementSysID, UnitCompID);
     ecs_require_component(ecs1, MovementSysID, CollisionEvent1CompID);
 
-    RenderSysID_House = ecs_register_system(ecs1, Render_System_House, NULL, NULL, NULL);
-    ecs_require_component(ecs1, RenderSysID_House, PositionCompID);
-    ecs_require_component(ecs1, RenderSysID_House, TextureCompID);
-    ecs_require_component(ecs1, RenderSysID_House, HouseCompID);
+    RenderHouse_SysID = ecs_register_system(ecs1, Render_System_House, NULL, NULL, NULL);
+    ecs_require_component(ecs1, RenderHouse_SysID, PositionCompID);
+    ecs_require_component(ecs1, RenderHouse_SysID, TextureCompID);
+    ecs_require_component(ecs1, RenderHouse_SysID, HouseCompID);
 
-    RenderSysID_Unit = ecs_register_system(ecs1, Render_System_Unit, NULL, NULL, NULL);
-    ecs_require_component(ecs1, RenderSysID_Unit, PositionCompID);
-    ecs_require_component(ecs1, RenderSysID_Unit, TextureCompID);
-    ecs_require_component(ecs1, RenderSysID_Unit, UnitCompID);
-    ecs_require_component(ecs1, RenderSysID_Unit, VelocityCompID);
+    RenderUnit_SysID = ecs_register_system(ecs1, Render_System_Unit, NULL, NULL, NULL);
+    ecs_require_component(ecs1, RenderUnit_SysID, PositionCompID);
+    ecs_require_component(ecs1, RenderUnit_SysID, TextureCompID);
+    ecs_require_component(ecs1, RenderUnit_SysID, UnitCompID);
+    ecs_require_component(ecs1, RenderUnit_SysID, VelocityCompID);
 }
 
 void Render_system_all(float dt)
 {
-    ecs_update_system(ecs1, RenderSysID_House, dt);
-    ecs_update_system(ecs1, RenderSysID_Unit, dt);
+    ecs_update_system(ecs1, RenderHouse_SysID, dt);
+    ecs_update_system(ecs1, RenderUnit_SysID, dt);
 }
 
 void Update_system_all(float dt)
