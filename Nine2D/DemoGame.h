@@ -1,10 +1,10 @@
 #pragma once
 #include "IGame.h"
-#include "Actor.h"
+#include "Actor1.h"
 
 class DemoGame : public IGame
 {
-	std::vector<Actor*>  mActorList;
+	std::vector<Actor1*>  mActorList;
 	int count = 0;
 	IRenderer* mRD = nullptr;
 

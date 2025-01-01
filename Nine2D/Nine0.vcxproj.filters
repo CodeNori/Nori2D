@@ -14,9 +14,6 @@
     <Filter Include="base">
       <UniqueIdentifier>{81d9d94e-2be9-4c30-8549-d0e1d4b836de}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tower">
-      <UniqueIdentifier>{16a183e0-aea2-4adf-8341-412addab62a7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Camera">
       <UniqueIdentifier>{3a7d6a06-9906-467d-8970-d35ec325ceca}</UniqueIdentifier>
     </Filter>
@@ -131,12 +128,6 @@
     <ClInclude Include="animation_data\Ultra_AD.h">
       <Filter>Animation</Filter>
     </ClInclude>
-    <ClInclude Include="Components_tower.h">
-      <Filter>Tower</Filter>
-    </ClInclude>
-    <ClInclude Include="System_tower.h">
-      <Filter>Tower</Filter>
-    </ClInclude>
     <ClInclude Include="imgui\imconfig.h">
       <Filter>Render\imGui\lib</Filter>
     </ClInclude>
@@ -173,10 +164,10 @@
     <ClInclude Include="Camera.h">
       <Filter>Camera</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionMap1.h">
+    <ClInclude Include="SpatialMap1.h">
       <Filter>2. System</Filter>
     </ClInclude>
-    <ClInclude Include="Sys_Collision.h">
+    <ClInclude Include="Sys_Physics.h">
       <Filter>2. System</Filter>
     </ClInclude>
     <ClInclude Include="CreateEntity.h">
@@ -187,6 +178,12 @@
     </ClInclude>
     <ClInclude Include="animation_data\House_AD.h">
       <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\ImgFileNames.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\GameRenderer.h">
+      <Filter>Render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -262,8 +259,14 @@
     <ClCompile Include="Components.cpp">
       <Filter>1. Component</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionMap1.cpp">
+    <ClCompile Include="SpatialMap1.cpp">
       <Filter>2. System</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\ImgFileNames.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\GameRenderer.cpp">
+      <Filter>Render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

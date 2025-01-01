@@ -10,6 +10,7 @@ struct UltraRect
 struct UltraAnchor
 {
 	float a_x, a_y;   // 이미지 안에서 중점 (Pixel)
+	float a_w, a_h;   // Width, Height
 
 	float physics_x1, physics_y1;  // 중점을 기준으로 Left, Top 의 상대위치
 	float physics_x2, physics_y2;	// 중점을 기준으로 Right, Bottom 의 상대위치
@@ -32,34 +33,19 @@ struct AnimRectTime
 
 
 
-void GetActorVertexUV(Dx2DRenderable2* rd, VERTEX* vt)
+void GetActorVertexUV_Ultra(Dx2DRenderable2* rd, VERTEX* vt)
 {
-	if (rd->tex.mName == ULTRA_FILE_NAME)
-	{
-		UltraRect* frames = UltraFrameAni_Dir[rd->dir];
-		UltraRect& uv = frames[rd->frameNo];
-		float a_x = -Farmer_FrameSizeF/2.f;
-		float a_y = (Farmer_FrameSizeF/2.f);
-		vt[1] = { rd->position.x+a_x,             rd->position.y+a_y, 0.f, uv.U1, uv.V1  };
+	//if (rd->tex.mName == ULTRA_FILE_NAME)
+	//{
+		UltraRect* frames = UltraFrameAni_Dir[rd->img->dir];
+		UltraRect& uv = frames[rd->img->frameNo];
+		float a_x = -Ultra_FrameSizeF/2.f;
+		float a_y = (Ultra_FrameSizeF/2.f);
+		vt[1] = { rd->pos->x+a_x,             rd->pos->y+a_y, 0.f, uv.U1, uv.V1  };
 		vt[0] = { vt[1].X,                  vt[1].Y-Ultra_FrameSizeF, 0.f, uv.U1, uv.V2  };
 		vt[2] = { vt[1].X+Ultra_FrameSizeF, vt[1].Y-Ultra_FrameSizeF, 0.f, uv.U2, uv.V2  };
 		vt[3] = { vt[1].X+Ultra_FrameSizeF,                  vt[1].Y, 0.f, uv.U2, uv.V1  };
-	}
-	if (rd->tex.mName == FARMER_FILE_NAME)
-	{
-		UltraRect* frames = Farmer_CalcAniDir(rd->vel);
-		UltraRect& uv = frames[rd->frameNo];
-		UltraAnchor& anchor = Farmer_A_up[rd->frameNo];
-		vt[1] = { rd->position.x+anchor.a_x, rd->position.y+anchor.a_y, 0.f, uv.U1, uv.V1  };
-		vt[0] = { vt[1].X,                   vt[1].Y-Farmer_FrameSizeF, 0.f, uv.U1, uv.V2  };
-		vt[2] = { vt[1].X+Farmer_FrameSizeF, vt[1].Y-Farmer_FrameSizeF, 0.f, uv.U2, uv.V2  };
-		vt[3] = { vt[1].X+Farmer_FrameSizeF,                   vt[1].Y, 0.f, uv.U2, uv.V1  };
-
-		rd->colRect->left = anchor.physics_x1;
-		rd->colRect->right = anchor.physics_x2;
-		rd->colRect->top = anchor.physics_y1;
-		rd->colRect->bottom = anchor.physics_y2;
-	}
+	//}
 
 	vt[0].X = (vt[0].X - g_CameraPos.x) / g_Dx11.half_width;
 	vt[0].Y = (vt[0].Y - g_CameraPos.y) / g_Dx11.half_height;
@@ -78,20 +64,23 @@ void GetActorAnimVertexUV(Dx2DRenderable2* rd, VERTEX* Vt)
 	AnimRectTime animTime;
 	if (rd->tex.mName == ULTRA_FILE_NAME) animTime = Ultra_Time;
 	if (rd->tex.mName == FARMER_FILE_NAME) animTime = Farmer_Time;
+	if (rd->tex.mName == TOWNHALL_FILE_NAME) animTime = House_Time;
 
 	float FrameTime = animTime.totalTime / animTime.totalFrame;
 
-	rd->AnimTime += g_Time.deltaTime;
+	rd->img->AnimTime += g_Time.deltaTime;
 
-	if (rd->AnimTime >= FrameTime)
+	if (rd->img->AnimTime >= FrameTime)
 	{
-		rd->frameNo++;
-		rd->AnimTime -= FrameTime;
-		if (rd->frameNo >= animTime.totalFrame)
-			rd->frameNo = 0;
+		rd->img->frameNo++;
+		rd->img->AnimTime -= FrameTime;
+		if (rd->img->frameNo >= animTime.totalFrame)
+			rd->img->frameNo = 0;
 	}
 
-	GetActorVertexUV(rd,Vt);
+	if (rd->tex.mName == ULTRA_FILE_NAME) GetActorVertexUV_Ultra(rd,Vt);
+	if (rd->tex.mName == FARMER_FILE_NAME) GetActorVertexUV_Farmer(rd,Vt);
+	if (rd->tex.mName == TOWNHALL_FILE_NAME) GetActorVertexUV_House(rd,Vt);
 
 }
 
@@ -120,6 +109,37 @@ int GetRadianToAnimIndex(float rad)
 	return dir;
 }
 
+void CalcNextAnimFrame(Img_t* img)
+{
+	AnimRectTime animTime;
+	if (img->texName == ULTRA_FILE_NAME) animTime = Ultra_Time;
+	if (img->texName == FARMER_FILE_NAME) animTime = Farmer_Time;
+	if (img->texName == TOWNHALL_FILE_NAME) animTime = House_Time;
 
+	float FrameTime = animTime.totalTime / animTime.totalFrame;
+
+	img->AnimTime += g_Time.deltaTime;
+
+	if (img->AnimTime >= FrameTime)
+	{
+		img->frameNo++;
+		img->AnimTime -= FrameTime;
+		if (img->frameNo >= animTime.totalFrame)
+			img->frameNo = 0;
+	}
+
+}
+
+CollisionRect FindCollisionRect(Img_t* img)
+{
+	UltraAnchor* array = nullptr;
+	if (img->texName == ULTRA_FILE_NAME) array = Ultra_A_up;
+	if (img->texName == FARMER_FILE_NAME) array = Farmer_A_up;
+	if (img->texName == TOWNHALL_FILE_NAME) array = House_A_up;
+
+	UltraAnchor& anchor = array[img->frameNo];
+
+	return { anchor.physics_x1, anchor.physics_x2, anchor.physics_y1, anchor.physics_y2, 0 };
+}
 
 

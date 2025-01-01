@@ -2,7 +2,7 @@
 #include "base/Vec2.h"
 #include "renderer\Dx2DRenderable.h"
 #include "renderer\Dx2DRenderer.h"
-#include "CollisionMap1.h"
+#include "SpatialMap1.h"
 #include "renderer\DxWindow.h"
 
 
@@ -16,7 +16,7 @@ ecs_id_t RenderUnit_SysID;
 
 //------------------------------------------------------
 
-#include "Sys_Collision.h"
+#include "Sys_Physics.h"
 #include "Sys_Movement.h"
 #include "Sys_Render.h"
 #include "CreateEntity.h"

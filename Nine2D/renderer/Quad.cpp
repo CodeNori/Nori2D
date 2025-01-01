@@ -7,35 +7,11 @@ using namespace DirectX;
 
 ID3D11InputLayout*  Quad::mVertexLayout = nullptr;
 
-// VERTEX gVT[4*1000]; 
 
-void RenderableToVertex(VERTEX* vt, Dx2DRenderable* rd)
-{
-	float ax = (rd->w * rd->ancherX);
-	float ay = (rd->h * rd->ancherY);
-	float lx = rd->position.x - ax;
-	float ty = rd->position.y + ay;
-	float rx = lx + rd->w;
-	float by = ty - rd->h;
-
-	float flx = (lx - g_Dx11.half_width) / g_Dx11.half_width;
-	float frx = (rx - g_Dx11.half_width) / g_Dx11.half_width;
-	float fty = (ty - g_Dx11.half_height) / g_Dx11.half_height;
-	float fby = (by - g_Dx11.half_height) / g_Dx11.half_height;
-
-
-    vt[0] = {flx, fby, 0.0f, 0.f, 1.f};
-	vt[1] = {flx, fty, 0.0f, 0.f, 0.f};
-	vt[2] = {frx, fby, 0.0f, 1.f, 1.f};
-	vt[3] = {frx, fty, 0.0f, 1.f, 0.f};
-
-}
 
 
 
 void GetActorAnimVertexUV(Dx2DRenderable2* rd, VERTEX* Vt);
-void GetActorAnimVertexUV_Farmer(Dx2DRenderable2* rd, VERTEX* Vt);
-void GetActorAnimVertexUV_House(Dx2DRenderable2* rd, VERTEX* Vt);
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -88,8 +64,8 @@ Quad::~Quad()
 
 void CalcVERTEX(Dx2DRenderable2* rd, VERTEX* vt)
 {
-	float lx = rd->position.x - (rd->w * rd->ancherX);
-	float ty = rd->position.y + (rd->h * rd->ancherY);
+	float lx = rd->pos->x-(rd->w*rd->ancherX);
+	float ty = rd->pos->y + (rd->h * rd->ancherY);
 	float rx = lx + rd->w;
 	float by = ty - rd->h;
 
@@ -113,8 +89,8 @@ void Quad::Update(Dx2DRenderable2* rd)
 		{ 0.5f,  0.5f, 0.0f, 1.f, 0.f}	
 	};
 
-	if(rd->tex.mName == TOWNHALL_FILE_NAME ) GetActorAnimVertexUV_House(rd, OurVertices);
-	else if(rd->tex.mName == FARMER_FILE_NAME ) GetActorAnimVertexUV_Farmer(rd, OurVertices);
+	if(rd->tex.mName == TOWNHALL_FILE_NAME ) GetActorAnimVertexUV(rd, OurVertices);
+	else if(rd->tex.mName == FARMER_FILE_NAME ) GetActorAnimVertexUV(rd, OurVertices);
 	else if(rd->tex.mName == ULTRA_FILE_NAME ) GetActorAnimVertexUV(rd, OurVertices);
 
 	// g_Dx11.context->UpdateSubresource( mVertexBuffer, 0, nullptr, OurVertices, 0, 0 );

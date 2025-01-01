@@ -33,9 +33,13 @@ ecs_ret_t Render_System_House(ecs_t* ecs,
         Img_t* img = (Img_t*)ecs_get(ecs, id, TextureCompID);
         CollisionRect* rect = (CollisionRect*)ecs_get(ecs, id, RectCompID);
 
-        rd.position.x = pos->x;
-        rd.position.y = pos->y;
-        rd.angle = pos->angle; 
+        // rd.position.x = pos->x;
+        // rd.position.y = pos->y;
+        // rd.angle = pos->angle; 
+
+        rd.pos = pos;
+        rd.img = img;
+        rd.colRect = rect;
         //rd.w = img->w;
         //rd.h = img->h;
         //rd.ancherX = img->ancherX; 
@@ -43,17 +47,16 @@ ecs_ret_t Render_System_House(ecs_t* ecs,
         // 
         rd.tex.mName = img->texName;
         rd.tex.mTextureRV = (ID3D11ShaderResourceView*)img->tex;
-        rd.dir = img->dir;
-        rd.AnimTime = img->AnimTime;
-        rd.frameNo = 0;
-        rd.colRect = rect;
+        // rd.dir = img->dir;
+        // rd.AnimTime = img->AnimTime;
+        // rd.frameNo = 0;
         
         g_ECS_Renderer->Draw2(&rd);
 
         img->tex = rd.tex.mTextureRV;   // 历厘..
-        img->AnimTime = rd.AnimTime;    // 历厘..
-        img->frameNo = rd.frameNo;      // 历厘..
-        img->dir = rd.dir;
+        // img->AnimTime = rd.AnimTime;    // 历厘..
+        // img->frameNo = rd.frameNo;      // 历厘..
+        // img->dir = rd.dir;
     }   
 
     g_ECS_Renderer->mPS = psOld;
@@ -91,9 +94,12 @@ ecs_ret_t Render_System_Unit(ecs_t* ecs,
         UnitState_t* flags = (UnitState_t*)ecs_get(ecs, id, UnitCompID);
         Velocity_t* vel = (Velocity_t*)ecs_get(ecs, id, VelocityCompID);
 
-        rd.position.x = pos->x;
-        rd.position.y = pos->y;
-        rd.angle = pos->angle; 
+        // rd.position.x = pos->x;
+        // rd.position.y = pos->y;
+        // rd.angle = pos->angle; 
+
+        rd.pos = pos;
+        rd.img = img;
         //rd.w = img->w;
         //rd.h = img->h;
         //rd.ancherX = img->ancherX; 
@@ -101,9 +107,9 @@ ecs_ret_t Render_System_Unit(ecs_t* ecs,
         // 
         rd.tex.mName = img->texName;
         rd.tex.mTextureRV = (ID3D11ShaderResourceView*)img->tex;
-        rd.dir = img->dir;
-        rd.AnimTime = img->AnimTime;
-        rd.frameNo = img->frameNo;
+        // rd.dir = img->dir;
+        //rd.AnimTime = img->AnimTime;
+        //rd.frameNo = img->frameNo;
         
         if(flags->isCollision)
             rd.color = {1.f, 0.f, 0.f, 1.f};
@@ -119,9 +125,9 @@ ecs_ret_t Render_System_Unit(ecs_t* ecs,
         // 历厘
         // 历厘.
         img->tex = rd.tex.mTextureRV;   // 历厘..
-        img->AnimTime = rd.AnimTime;    // 历厘..
-        img->frameNo = rd.frameNo;      // 历厘..
-        img->dir = rd.dir;
+        // img->AnimTime = rd.AnimTime;    // 历厘..
+        // img->frameNo = rd.frameNo;      // 历厘..
+        // img->dir = rd.dir;
     }   
 
     return 0;

@@ -1,6 +1,6 @@
 
 
-CollisionMap1 col_Map1;
+SpatialMap1 col_Map1;
 
 
 void Process_Overlapped(ecs_id_t id1, ecs_id_t id2)

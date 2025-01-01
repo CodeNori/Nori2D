@@ -68,3 +68,24 @@ UltraRect* UltraFrameAni_Dir[16] = {
 
 AnimRectTime Ultra_Time = { Ultra_FrameAnimationTime, ARRAYSIZE(Ultra_0) };
 
+UltraAnchor Ultra_A_up[] = {
+	{-16.f,16.f, Ultra_FrameSizeF,Ultra_FrameSizeF, -16.f,16.f, 16.f,-16.f},
+	{-16.f,16.f, Ultra_FrameSizeF,Ultra_FrameSizeF,-16.f,16.f, 16.f,-16.f},
+	{-16.f,16.f, Ultra_FrameSizeF,Ultra_FrameSizeF,-16.f,16.f, 16.f,-16.f},
+	{-16.f,16.f, Ultra_FrameSizeF,Ultra_FrameSizeF,-16.f,16.f, 16.f,-16.f},
+	{-16.f,16.f, Ultra_FrameSizeF,Ultra_FrameSizeF,-16.f,16.f, 16.f,-16.f},
+	{-16.f,16.f, Ultra_FrameSizeF,Ultra_FrameSizeF,-16.f,16.f, 16.f,-16.f},
+	{-16.f,16.f, Ultra_FrameSizeF,Ultra_FrameSizeF,-16.f,16.f, 16.f,-16.f},
+	{-16.f,16.f, Ultra_FrameSizeF,Ultra_FrameSizeF,-16.f,16.f, 16.f,-16.f},
+	{-16.f,16.f, Ultra_FrameSizeF,Ultra_FrameSizeF,-16.f,16.f, 16.f,-16.f},
+	{-16.f,16.f, Ultra_FrameSizeF,Ultra_FrameSizeF,-16.f,16.f, 16.f,-16.f},
+	{-16.f,16.f, Ultra_FrameSizeF,Ultra_FrameSizeF,-16.f,16.f, 16.f,-16.f},
+	{-16.f,16.f, Ultra_FrameSizeF,Ultra_FrameSizeF,-16.f,16.f, 16.f,-16.f},
+	{-16.f,16.f, Ultra_FrameSizeF,Ultra_FrameSizeF,-16.f,16.f, 16.f,-16.f},
+	{-16.f,16.f, Ultra_FrameSizeF,Ultra_FrameSizeF,-16.f,16.f, 16.f,-16.f},
+	{-16.f,16.f, Ultra_FrameSizeF,Ultra_FrameSizeF,-16.f,16.f, 16.f,-16.f},
+	{-16.f,16.f, Ultra_FrameSizeF,Ultra_FrameSizeF,-16.f,16.f, 16.f,-16.f},
+	{-16.f,16.f, Ultra_FrameSizeF,Ultra_FrameSizeF,-16.f,16.f, 16.f,-16.f},
+};
+
+

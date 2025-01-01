@@ -1,9 +1,9 @@
 #pragma once
 
 
-class CollisionMap1
+class SpatialMap1
 {
-    static const int PARTITIONS = (128*2);
+    static const int PARTITIONS = (256);
 public:
     int size_x, size_y;
     float start_x, start_y;
@@ -25,5 +25,6 @@ public:
     void Collide();
     void DebugPrint();
 
+    int Find(CollisionRect* rc, std::vector<ecs_id_t>& idList);
 };
 

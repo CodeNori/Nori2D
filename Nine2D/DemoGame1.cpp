@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "DemoGame1.h"
 #include "renderer\Dx2DRenderer.h"
-#include "Actor.h"
+#include "Actor1.h"
 #include "Components.h"
 
 #include "DxImGui.h"

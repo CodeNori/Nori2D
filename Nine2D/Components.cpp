@@ -2,7 +2,7 @@
 #include "base/Vec2.h"
 #include "renderer\Dx2DRenderable.h"
 #include "renderer\Dx2DRenderer.h"
-#include "CollisionMap1.h"
+#include "SpatialMap1.h"
 #include "renderer\DxWindow.h"
 
 #define PICO_ECS_IMPLEMENTATION

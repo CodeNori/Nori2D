@@ -59,8 +59,8 @@ struct Velocity_t
 
 struct Img_t
 {
-	int dir;
-	int frameNo;
+	short dir;
+	short frameNo;
 	float AnimTime;
 
 	const WCHAR* texName; 

@@ -1,8 +1,8 @@
 #include "pch.h"
-#include "CollisionMap1.h"
+#include "SpatialMap1.h"
 
 
-void CollisionMap1::Setup(float sx, float sy, int w, int h)
+void SpatialMap1::Setup(float sx, float sy, int w, int h)
 {
     start_x = sx;
     start_y = sy;
@@ -34,7 +34,7 @@ void CollisionMap1::Setup(float sx, float sy, int w, int h)
     //DebugPrint();
 }
 
-void CollisionMap1::Clear_test()
+void SpatialMap1::Clear_test()
 {
     events.clear();
 
@@ -46,7 +46,7 @@ void CollisionMap1::Clear_test()
 int g_sl, g_sr, g_st, g_sb;
 int g_left, g_right, g_top, g_bottom;
 
-int CollisionMap1::FindSlot(CollisionRect* rc, int* slot)
+int SpatialMap1::FindSlot(CollisionRect* rc, int* slot)
 {
     float f_l = rc->left - start_x;
     float f_r = rc->right - start_x;
@@ -100,7 +100,7 @@ int CollisionMap1::FindSlot(CollisionRect* rc, int* slot)
 }
 
 
-void CollisionMap1::Insert(CollisionRect* rc)
+void SpatialMap1::Insert(CollisionRect* rc)
 {
     int slot[4] = {-1,-1,-1,-1};
     int slotCnt = FindSlot(rc, slot);
@@ -110,7 +110,7 @@ void CollisionMap1::Insert(CollisionRect* rc)
 
 }
 
-void CollisionMap1::Insert1(CollisionRect* rc)
+void SpatialMap1::Insert1(CollisionRect* rc)
 {
     int slot[4] = {-1,-1,-1,-1};
     int slotCnt = FindSlot(rc, slot);
@@ -147,7 +147,7 @@ void CollisionMap1::Insert1(CollisionRect* rc)
 }
 
 
-void CollisionMap1::Insert2(CollisionRect* rc)
+void SpatialMap1::Insert2(CollisionRect* rc)
 {
     int count = 0;
 
@@ -162,7 +162,7 @@ void CollisionMap1::Insert2(CollisionRect* rc)
 void Process_Overlapped(ecs_id_t id1, ecs_id_t id2);
 
 
-void CollisionMap1::Collide() 
+void SpatialMap1::Collide() 
 {
     collisionCount = 0;
 
@@ -180,7 +180,7 @@ void CollisionMap1::Collide()
     }
 }
 
-void CollisionMap1::DebugPrint()
+void SpatialMap1::DebugPrint()
 {
     for(auto it : grid) {        
         int sz = it.capacity();
@@ -189,3 +189,27 @@ void CollisionMap1::DebugPrint()
 
     OutputDebugStringA("--------- end --------");
 }
+
+int SpatialMap1::Find(CollisionRect* my, std::vector<ecs_id_t>& idList)
+{
+    int slot[4];
+    int count = FindSlot(my, slot);
+    int collision_count = 0;
+
+    for (int i=0; i<count; ++i) 
+    {
+        std::vector<CollisionRect>& candidates = grid[i];
+        for (const CollisionRect& left : candidates) {
+            if (left.id == my->id) continue;
+            if (isOverlapped(left, *my)) {
+                idList.push_back(left.id);
+                ++collision_count;
+            }
+        }
+    }
+
+    return collision_count;
+}
+
+
+

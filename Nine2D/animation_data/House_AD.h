@@ -22,8 +22,8 @@ UltraRect House_up[] = {
 };
 
 UltraAnchor House_A_up[] = {
-	{-31.f,77.f, -27.f,65.f, 27.f,0.f},
-	{-31.f,77.f, -27.f,65.f, 27.f,0.f},
+	{-31.f,77.f, House_FrameWidthF,House_FrameHeightF, -27.f,65.f, 27.f,0.f},
+	{-31.f,77.f, House_FrameWidthF,House_FrameHeightF, -27.f,65.f, 27.f,0.f},
 };
 
 
@@ -35,9 +35,9 @@ void GetActorVertexUV_House(Dx2DRenderable2* rd, VERTEX* vt)
 {
 	UltraRect* frames = House_up;
 	UltraRect& uv = frames[0];
-	UltraAnchor& anchor = House_A_up[rd->frameNo];
-	float left = rd->position.x+anchor.a_x;
-	float top = rd->position.y+anchor.a_y;
+	UltraAnchor& anchor = House_A_up[rd->img->frameNo];
+	float left = rd->pos->x+anchor.a_x;
+	float top = rd->pos->y+anchor.a_y;
 
 	vt[0] = { left,                   top-House_FrameHeightF, 0.f, uv.U1, uv.V2  };
 	vt[1] = { left, top, 0.f, uv.U1, uv.V1  };
@@ -57,24 +57,4 @@ void GetActorVertexUV_House(Dx2DRenderable2* rd, VERTEX* vt)
 	vt[2].Y = (vt[2].Y - g_CameraPos.y) / g_Dx11.half_height;
 	vt[3].X = (vt[3].X - g_CameraPos.x) / g_Dx11.half_width;
 	vt[3].Y = (vt[3].Y - g_CameraPos.y) / g_Dx11.half_height;
-}
-
-void GetActorAnimVertexUV_House(Dx2DRenderable2* rd, VERTEX* Vt)
-{
-	AnimRectTime animTime = House_Time;
-
-	float FrameTime = animTime.totalTime / animTime.totalFrame;
-
-	rd->AnimTime += g_Time.deltaTime;
-
-	if (rd->AnimTime >= FrameTime)
-	{
-		rd->frameNo++;
-		rd->AnimTime -= FrameTime;
-		if (rd->frameNo >= animTime.totalFrame)
-			rd->frameNo = 0;
-	}
-
-	GetActorVertexUV_House(rd,Vt);
-
 }

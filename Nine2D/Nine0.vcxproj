@@ -143,10 +143,9 @@
     <ClInclude Include="base\RefObject.h" />
     <ClInclude Include="base\Vec2.h" />
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="CollisionMap1.h" />
+    <ClInclude Include="SpatialMap1.h" />
     <ClInclude Include="Components.h" />
     <ClInclude Include="Components_func.h" />
-    <ClInclude Include="Components_tower.h" />
     <ClInclude Include="CreateEntity.h" />
     <ClInclude Include="DemoGame1.h" />
     <ClInclude Include="DxImGui.h" />
@@ -166,10 +165,11 @@
     <ClInclude Include="renderer\DxShader.h" />
     <ClInclude Include="renderer\DxTexture.h" />
     <ClInclude Include="renderer\DxWindow.h" />
+    <ClInclude Include="renderer\GameRenderer.h" />
+    <ClInclude Include="renderer\ImgFileNames.h" />
     <ClInclude Include="renderer\Quad.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="System_tower.h" />
-    <ClInclude Include="Sys_Collision.h" />
+    <ClInclude Include="Sys_Physics.h" />
     <ClInclude Include="Sys_Movement.h" />
     <ClInclude Include="Sys_Render.h" />
     <ClInclude Include="targetver.h" />
@@ -186,7 +186,7 @@
     <ClCompile Include="base\MyUtils.cpp" />
     <ClCompile Include="base\Vec2.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="CollisionMap1.cpp" />
+    <ClCompile Include="SpatialMap1.cpp" />
     <ClCompile Include="Components.cpp" />
     <ClCompile Include="ECSystem.cpp" />
     <ClCompile Include="DemoGame1.cpp" />
@@ -228,6 +228,8 @@
     <ClCompile Include="renderer\DxShader.cpp" />
     <ClCompile Include="renderer\DxTexture.cpp" />
     <ClCompile Include="renderer\DxWindow.cpp" />
+    <ClCompile Include="renderer\GameRenderer.cpp" />
+    <ClCompile Include="renderer\ImgFileNames.cpp" />
     <ClCompile Include="renderer\Quad.cpp" />
     <ClCompile Include="tk\DDSTextureLoader.cpp" />
     <ClCompile Include="tk\WICTextureLoader.cpp" />
