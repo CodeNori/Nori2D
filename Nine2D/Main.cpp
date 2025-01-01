@@ -8,8 +8,11 @@
 #include "DemoGame.h"
 #include "DemoGame1.h"
 #include "DxImGui.h"
+#include "JSON_test.h"
 
 extern Dx2DRenderer* g_ECS_Renderer;
+
+
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -20,6 +23,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // UNREFERENCED_PARAMETER(lpCmdLine);
 
     srand(time(nullptr));
+
+    if(Test_JSON()) return 0;
 
     ecs1 = ecs_new(1024, NULL);
 

@@ -135,14 +135,17 @@
   <ItemGroup>
     <ClInclude Include="Actor1.h" />
     <ClInclude Include="AnimationData.h" />
+    <ClInclude Include="AnimationLoader.h" />
     <ClInclude Include="animation_data\Farmer_AD.h" />
     <ClInclude Include="animation_data\House_AD.h" />
     <ClInclude Include="animation_data\Ultra_AD.h" />
     <ClInclude Include="base\MathBase.h" />
     <ClInclude Include="base\MyUtils.h" />
     <ClInclude Include="base\RefObject.h" />
+    <ClInclude Include="base\simdjson.h" />
     <ClInclude Include="base\Vec2.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="JSON_test.h" />
     <ClInclude Include="SpatialMap1.h" />
     <ClInclude Include="Components.h" />
     <ClInclude Include="Components_func.h" />
@@ -183,7 +186,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor1.cpp" />
+    <ClCompile Include="AnimationLoader.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="base\MyUtils.cpp" />
+    <ClCompile Include="base\simdjson.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="base\Vec2.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="SpatialMap1.cpp" />

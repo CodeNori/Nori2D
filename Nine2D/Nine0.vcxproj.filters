@@ -185,6 +185,15 @@
     <ClInclude Include="renderer\GameRenderer.h">
       <Filter>Render</Filter>
     </ClInclude>
+    <ClInclude Include="base\simdjson.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="JSON_test.h">
+      <Filter>WinMain</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationLoader.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tk\DDSTextureLoader.cpp">
@@ -267,6 +276,12 @@
     </ClCompile>
     <ClCompile Include="renderer\GameRenderer.cpp">
       <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="base\simdjson.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationLoader.cpp">
+      <Filter>Animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
