@@ -35,7 +35,12 @@ bool JsonAnimFileLoader(AnimFrameFile& affile, const char* jsoneFile)
       frameArray.push_back(f);
     }
 
-    affile.imgFileName = std::string( std::string_view(doc["meta"]["image"]) );
+    ondemand::object meta = doc["meta"];
+
+    affile.imgFileName = std::string( std::string_view(meta["image"]) );
+    affile.img_w = uint64_t( meta["size"]["w"] );
+    affile.img_h = uint64_t( meta["size"]["h"] );
+
 
     return true;
 }

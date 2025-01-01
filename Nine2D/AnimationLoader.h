@@ -9,6 +9,7 @@ struct FRAME_t {
 
 struct AnimFrameFile 
 {
+    uint16_t img_w, img_h;
     std::string imgFileName;
     std::vector<FRAME_t> frames;
 };
